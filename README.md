@@ -56,12 +56,10 @@ Is there anything simpler than this?
 
 The comparing performance and .text size.
 
-|                          |       `base raw`       |        `delta`         |
-|                          |-------------|----------|-------------|----------|
-|          `name`          |   `bench`   | `.text`  |   `bench`   | `.text`  |
-|--------------------------|-------------|----------|-------------|----------|
+|          `name`          |   `bench`   | `.text`  |  `Δ bench` | `Δ .text` |
+|:-------------------------|------------:|---------:|------------:|---------:|
 | cmp_null_void            |    1.750 kc |  318 kib |    0.000 kc |    0 kib |
-| cmp_flood-tide           |    6.754 kc |  372 kib |    5.004 kc |   54 kib |
+| **cmp_flood-tide**       |    6.754 kc |  372 kib |    5.004 kc |   54 kib |
 | cmp_gumdrop              |   14.251 kc |  474 kib |   12.500 kc |  156 kib |
 | cmp_argh                 |   26.205 kc |  404 kib |   24.455 kc |   85 kib |
 | cmp_pico_args            |  156.760 kc |  413 kib |  155.010 kc |   94 kib |
@@ -77,7 +75,7 @@ The comparing performance and .text size.
 
 - `us` is micro seconds
 - `.text` is elf .text section size
-- `delta` is the difference from cmp_null_void
+- `Δ`(delta) is the difference from cmp_null_void
 - `cmp_null_void` is non parser, support only `--help` and `--version`
 - `cmp_pure_rust` is newly written with sting match
 - refer [comparison of various parsers](https://github)

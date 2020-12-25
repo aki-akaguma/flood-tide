@@ -2,6 +2,12 @@ TBD
 ===
 Unreleased changes. Release notes have not yet been written.
 
+0.1.17 (2020-12-25)
+=====
+Feature:
+
+* fix README.md
+
 0.1.16 (2020-12-25)
 =====
 Feature:
