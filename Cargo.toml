@@ -1,0 +1,82 @@
+[package]
+name = "flood-tide"
+version = "0.1.15"
+authors = ["aki <aki.akaguma@hotmail.com>"]
+description = """
+command line flag and option parse utilities
+"""
+keywords = ["cli", "command", "flag", "option", "parse", "getopts", "arg", "argument"]
+categories = ["command-line interface"]
+license = "MIT OR Apache-2.0"
+readme = "README.md"
+edition = "2018"
+
+[features]
+default = ["plain"]
+
+plain = ["option_argument", "argument", "stop_at_mm"]
+plain_subc = ["plain", "subcommand"]
+plain_lo = ["plain", "long_only"]
+plain_lo_subc = ["plain", "long_only", "subcommand"]
+
+simple_gnu_style = ["plain", "abbreviate"]
+no_std_plain = ["no_std", "plain"]
+
+no_std = []
+
+argument = []
+option_argument = []
+stop_at_mm = []
+subcommand = []
+
+long_only = []
+single_error = []
+stop_at_free = []
+
+abbreviate = []
+optnum_u16 = []
+was_long = []
+
+[dependencies]
+
+[dev-dependencies]
+criterion = "0.3"
+criterion-cycles-per-byte = "0.1"
+
+[workspace]
+members = [
+    "xtask",
+]
+
+[[bench]]
+name = "bench-one"
+harness = false
+
+[[bench]]
+name = "bench-curl"
+harness = false
+required-features = ["option_argument", "abbreviate", "argument", "stop_at_mm"]
+
+[[example]]
+name = "gnu-cat"
+path = "examples/gnu-cat.rs"
+test = true
+required-features = ["option_argument", "single_error", "abbreviate", "stop_at_mm", "stop_at_free"]
+
+[[example]]
+name = "bsd-sed"
+path = "examples/bsd-sed.rs"
+test = true
+required-features = ["option_argument", "single_error", "stop_at_mm", "stop_at_free"]
+
+[[example]]
+name = "ffmpeg"
+path = "examples/ffmpeg.rs"
+test = true
+required-features = ["option_argument", "single_error", "long_only"]
+
+[[example]]
+name = "curl"
+path = "examples/curl.rs"
+test = true
+required-features = ["option_argument", "abbreviate", "argument", "stop_at_mm"]
