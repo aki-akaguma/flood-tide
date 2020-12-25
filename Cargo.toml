@@ -2,9 +2,7 @@
 name = "flood-tide"
 version = "0.1.15"
 authors = ["aki <aki.akaguma@hotmail.com>"]
-description = """
-command line flag and option parse utilities
-"""
+description = "command line flag and option parse utilities"
 keywords = ["cli", "command", "flag", "option", "parse", "getopts", "arg", "argument"]
 categories = ["command-line interface"]
 license = "MIT OR Apache-2.0"
