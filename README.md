@@ -57,6 +57,7 @@ Is there anything simpler than this?
 The comparing performance and .text size.
 
 |                          |       `base raw`       |        `delta`         |
+|                          |-------------|----------|-------------|----------|
 |          `name`          |   `bench`   | `.text`  |   `bench`   | `.text`  |
 |--------------------------|-------------|----------|-------------|----------|
 | cmp_null_void            |    1.750 kc |  318 kib |    0.000 kc |    0 kib |
