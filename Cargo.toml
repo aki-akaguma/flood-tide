@@ -1,9 +1,9 @@
 [package]
 name = "flood-tide"
-version = "0.1.15"
+version = "0.1.16"
 authors = ["aki <aki.akaguma@hotmail.com>"]
 description = "command line flag and option parse utilities"
-keywords = ["command", "flag", "option", "parse", "argument"]
+keywords = ["parse", "option", "command", "flag", "argument"]
 categories = ["command-line-interface"]
 license = "MIT OR Apache-2.0"
 readme = "README.md"

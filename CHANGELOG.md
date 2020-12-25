@@ -2,6 +2,12 @@ TBD
 ===
 Unreleased changes. Release notes have not yet been written.
 
+0.1.16 (2020-12-25)
+=====
+Feature:
+
+* publish to crates.io
+
 0.1.15 (2020-12-25)
 =====
 Feature:
