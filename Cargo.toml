@@ -10,6 +10,7 @@ categories = ["command-line interface"]
 license = "MIT OR Apache-2.0"
 readme = "README.md"
 edition = "2018"
+repository = "https://github.com/aki-akaguma/flood-tide"
 
 [features]
 default = ["plain"]
