@@ -8,16 +8,17 @@
 - flags, options, subcommand and free arguments
 - short flags and options (like `-a`)
 - long flags and options (like `--long`)
-- combined short flags (like `-abc` :=: `-a` `-b` `-c`)
+- combined short flags (like `-abc` ::= `-a` `-b` `-c`)
 - single long options (like `-long`)
-- abbreviate long options (like `--abbr` :=: `--abbreviate`)
-- single error or multiple error
+- abbreviate long options (like `--abbr` ::= `--abbreviate`)
+- single error or multiple errors
 - only UTF-8 arguments
 - it can be used optimally by a compile switch with many features.
+- minimum support: rustc 1.41.1 (f3e1a954d 2020-02-24)
 
 ## Todos
 
-- [x] multiple error
+- [x] multiple errors
 - [x] `no_std`
 - [ ] option suggestion (do you mean? '--abc')
 - [ ] windows style (like `/a`)
@@ -32,7 +33,7 @@
 
 ## Examples
 
-in examples directory.
+in [examples](https://github.com/aki-akaguma/flood-tide/tree/main/examples) directory.
 
 - manual coding style: bsd-sed.rs, gnu-cat.rs
 - single long options: ffmpeg.rs
