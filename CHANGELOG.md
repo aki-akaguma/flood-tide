@@ -2,6 +2,12 @@ TBD
 ===
 Unreleased changes. Release notes have not yet been written.
 
+0.1.18 (2021-01-03)
+=====
+Feature:
+
+* update rustc 1.49.0 (e1884a8e3 2020-12-29)
+
 0.1.17 (2020-12-25)
 =====
 Feature:

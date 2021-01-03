@@ -59,25 +59,27 @@ The comparing performance and .text size.
 
 |       `name`       |   `bench`   | `.text`  |  `Δ bench`  | `Δ .text` |
 |:-------------------|------------:|---------:|------------:|---------:|
-| cmp_null_void      |    1.795 kc |  318 kib |    0.000 kc |    0 kib |
-| **cmp_flood_tide** |    7.030 kc |  372 kib |    5.234 kc |   54 kib |
-| cmp_gumdrop        |   14.357 kc |  474 kib |   12.562 kc |  156 kib |
-| cmp_pure_rust      |   17.833 kc |  385 kib |   16.038 kc |   67 kib |
-| cmp_argh           |   26.372 kc |  404 kib |   24.577 kc |   85 kib |
-| cmp_pico_args      |  160.434 kc |  413 kib |  158.639 kc |   94 kib |
-| cmp_rustop         |  437.199 kc |  495 kib |  435.404 kc |  177 kib |
-| cmp_clap           |  589.117 kc |  934 kib |  587.322 kc |  616 kib |
-| cmp_getopts        |  683.997 kc |  408 kib |  682.202 kc |   90 kib |
-| cmp_structopt      |  723.818 kc | 1015 kib |  722.023 kc |  697 kib |
-| cmp_commander      |  752.331 kc |  421 kib |  750.535 kc |  102 kib |
-| cmp_lapp           | 1123.426 kc |  461 kib | 1121.631 kc |  142 kib |
-| cmp_args           | 2097.303 kc |  459 kib | 2095.508 kc |  140 kib |
-| cmp_app            | 2378.484 kc |  707 kib | 2376.689 kc |  388 kib |
-| cmp_docopt         | 5849.126 kc | 1690 kib | 5847.331 kc | 1371 kib |
+| cmp_null_void      |    1.754 kc |  323 kib |    0.000 kc |    0 kib |
+| **cmp_flood_tide** |    6.654 kc |  377 kib |    4.900 kc |   54 kib |
+| cmp_gumdrop        |   14.244 kc |  477 kib |   12.490 kc |  153 kib |
+| cmp_pure_rust      |   16.439 kc |  389 kib |   14.685 kc |   66 kib |
+| cmp_argh           |   26.279 kc |  409 kib |   24.525 kc |   85 kib |
+| cmp_pico_args      |  156.589 kc |  421 kib |  154.835 kc |   98 kib |
+| cmp_rustop         |  439.899 kc |  498 kib |  438.145 kc |  175 kib |
+| cmp_clap           |  562.743 kc |  942 kib |  560.989 kc |  618 kib |
+| cmp_structopt      |  676.121 kc | 1023 kib |  674.367 kc |  700 kib |
+| cmp_getopts        |  697.585 kc |  412 kib |  695.831 kc |   89 kib |
+| cmp_commander      |  762.846 kc |  424 kib |  761.092 kc |  100 kib |
+| cmp_lapp           | 1109.102 kc |  464 kib | 1107.348 kc |  140 kib |
+| cmp_args           | 2064.578 kc |  464 kib | 2062.824 kc |  140 kib |
+| cmp_app            | 2379.029 kc |  714 kib | 2377.275 kc |  390 kib |
+| cmp_docopt         | 5714.188 kc | 1694 kib | 5712.434 kc | 1370 kib |
 
 - `us` is micro seconds
 - `.text` is elf .text section size
 - `Δ`(delta) is the difference from cmp_null_void
 - `cmp_null_void` is non parser, support only `--help` and `--version`
 - `cmp_pure_rust` is newly written with sting match
+- rustc 1.49.0 (e1884a8e3 2020-12-29)
+- bench on intel Q6600 @ 2.40GHz
 - refer [comparison of various parsers](https://github.com/aki-akaguma/cmp_cmdopts_parsing)
