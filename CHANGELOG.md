@@ -2,6 +2,13 @@ TBD
 ===
 Unreleased changes. Release notes have not yet been written.
 
+0.1.19 (2021-01-09)
+=====
+Feature:
+
+* add "dox" into features
+* bug fix README.md
+
 0.1.18 (2021-01-03)
 =====
 Feature:

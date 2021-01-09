@@ -89,42 +89,42 @@ impl OptParseError {
         Self::new_p1(OptParseErrorKind::MissingOption, desc1)
     }
     //
-    #[cfg(feature = "option_argument")]
+    #[cfg(any(feature = "option_argument", feature = "dox"))]
     pub fn invalid_option_argument(desc1: &str, desc2: &str) -> Self {
         Self::new_p2(OptParseErrorKind::InvalidOptionArgument, desc1, desc2)
     }
-    #[cfg(feature = "option_argument")]
+    #[cfg(any(feature = "option_argument", feature = "dox"))]
     pub fn unexpected_option_argument(desc1: &str, desc2: &str) -> Self {
         Self::new_p2(OptParseErrorKind::UnexpectedOptionArgument, desc1, desc2)
     }
-    #[cfg(feature = "option_argument")]
+    #[cfg(any(feature = "option_argument", feature = "dox"))]
     pub fn missing_option_argument(desc1: &str) -> Self {
         Self::new_p1(OptParseErrorKind::MissingOptionArgument, desc1)
     }
     //
-    #[cfg(feature = "argument")]
+    #[cfg(any(feature = "argument", feature = "dox"))]
     pub fn unexpected_argument(desc1: &str) -> Self {
         Self::new_p1(OptParseErrorKind::UnexpectedArgument, desc1)
     }
-    #[cfg(feature = "argument")]
+    #[cfg(any(feature = "argument", feature = "dox"))]
     pub fn missing_argument(desc1: &str) -> Self {
         Self::new_p1(OptParseErrorKind::MissingArgument, desc1)
     }
     //
-    #[cfg(feature = "subcommand")]
+    #[cfg(any(feature = "subcommand", feature = "dox"))]
     pub fn invalid_subcommand(desc1: &str) -> Self {
         Self::new_p1(OptParseErrorKind::InvalidSubcommand, desc1)
     }
-    #[cfg(feature = "subcommand")]
+    #[cfg(any(feature = "subcommand", feature = "dox"))]
     pub fn missing_subcommand(desc1: &str) -> Self {
         Self::new_p1(OptParseErrorKind::MissingSubcommand, desc1)
     }
     //
-    #[cfg(feature = "abbreviate")]
+    #[cfg(any(feature = "abbreviate", feature = "dox"))]
     pub fn ambiguous_option(desc1: &str, desc2: &str) -> Self {
         Self::new_p2(OptParseErrorKind::AmbiguousOption, desc1, desc2)
     }
-    #[cfg(all(feature = "abbreviate", feature = "subcommand"))]
+    #[cfg(any(all(feature = "abbreviate", feature = "subcommand"), feature = "dox"))]
     pub fn ambiguous_subcommand(desc1: &str, desc2: &str) -> Self {
         Self::new_p2(OptParseErrorKind::AmbiguousSubcommand, desc1, desc2)
     }
@@ -167,7 +167,7 @@ impl Display for OptParseError {
     }
 }
 
-#[cfg(not(feature = "no_std"))]
+#[cfg(any(not(feature = "no_std"), feature = "dox"))]
 impl std::error::Error for OptParseError {}
 
 /// Multiple option parse errors
@@ -212,5 +212,5 @@ impl Display for OptParseErrors {
         }
     }
 }
-#[cfg(not(feature = "no_std"))]
+#[cfg(any(not(feature = "no_std"), feature = "dox"))]
 impl std::error::Error for OptParseErrors {}

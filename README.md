@@ -80,6 +80,6 @@ The comparing performance and .text size.
 - `Δ`(delta) is the difference from cmp_null_void
 - `cmp_null_void` is non parser, support only `--help` and `--version`
 - `cmp_pure_rust` is newly written with sting match
-- rustc 1.49.0 (e1884a8e3 2020-12-29)
+- compile by rustc 1.49.0 (e1884a8e3 2020-12-29)
 - bench on intel Q6600 @ 2.40GHz
 - refer [comparison of various parsers](https://github.com/aki-akaguma/cmp_cmdopts_parsing)

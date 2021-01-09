@@ -16,11 +16,11 @@ pub mod check;
 pub mod err;
 pub use err::OptParseError;
 
-#[cfg(not(feature = "single_error"))]
+#[cfg(any(not(feature = "single_error"), feature = "dox"))]
 pub use err::OptParseErrors;
 
 /// Option parse error type
-#[cfg(not(feature = "single_error"))]
+#[cfg(any(not(feature = "single_error"), feature = "dox"))]
 pub type OPErr = OptParseErrors;
 
 /// Option parse error type
@@ -32,7 +32,7 @@ pub type OPErr = OptParseError;
 pub type OptNum = u16;
 
 /// Option number type
-#[cfg(not(feature = "optnum_u16"))]
+#[cfg(any(not(feature = "optnum_u16"), feature = "dox"))]
 pub type OptNum = u8;
 
 pub use err::OptParseErrorKind;
@@ -40,7 +40,7 @@ pub use err::OptParseErrorKind;
 /// Parse simple gnu style.
 ///
 ///
-#[cfg(feature = "stop_at_mm")]
+#[cfg(any(feature = "stop_at_mm", feature = "dox"))]
 pub fn parse_simple_gnu_style<'a, T, F>(
     conf: &mut T,
     opt_ary: &'a [Opt],
@@ -124,7 +124,7 @@ pub struct Opt<'a> {
     /// long name
     pub lon: &'a str,
     /// has arg / option argument
-    #[cfg(feature = "option_argument")]
+    #[cfg(any(feature = "option_argument", feature = "dox"))]
     pub has: Arg,
     /// uniq number
     pub num: OptNum,
@@ -134,9 +134,9 @@ pub struct Opt<'a> {
 #[derive(Debug)]
 pub struct NameVal<'a> {
     pub opt: &'a Opt<'a>,
-    #[cfg(feature = "option_argument")]
+    #[cfg(any(feature = "option_argument", feature = "dox"))]
     pub val: Option<&'a str>,
-    #[cfg(feature = "was_long")]
+    #[cfg(any(feature = "was_long", feature = "dox"))]
     pub was_long: bool,
 }
 
@@ -164,9 +164,9 @@ impl<'a> NameVal<'a> {
 #[derive(Debug)]
 pub struct Tokens<'a> {
     pub namevals: Vec<NameVal<'a>>,
-    #[cfg(feature = "stop_at_mm")]
+    #[cfg(any(feature = "stop_at_mm", feature = "dox"))]
     pub double_m: bool,
-    #[cfg(feature = "subcommand")]
+    #[cfg(any(feature = "subcommand", feature = "dox"))]
     pub subcmd: Option<&'a str>,
     pub free: Vec<&'a str>,
 }
@@ -211,7 +211,7 @@ pub struct Tokens<'a> {
 pub struct Lex<'a> {
     opts: &'a [Opt<'a>],
     sho_idx: &'a [(u8, usize)],
-    #[cfg(feature = "subcommand")]
+    #[cfg(any(feature = "subcommand", feature = "dox"))]
     subcmds: &'a [&'a str],
 }
 
@@ -226,7 +226,7 @@ impl<'a> Lex<'a> {
         }
     }
     /// setup subcommand ary
-    #[cfg(feature = "subcommand")]
+    #[cfg(any(feature = "subcommand", feature = "dox"))]
     #[inline]
     pub fn subcmd(mut self, subcmd_ary: &'a [&'a str]) -> Self {
         self.subcmds = subcmd_ary;

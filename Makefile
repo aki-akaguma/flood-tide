@@ -31,6 +31,9 @@ clean:
 	-@rm -f *.tmp
 	-@cargo clean
 
+doc:
+	cargo doc --features dox
+
 gen: $(example_curl_gen)
 
 gen-clean:
