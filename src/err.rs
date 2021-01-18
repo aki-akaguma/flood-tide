@@ -23,6 +23,9 @@ use alloc::vec::Vec;
 
 #[derive(Debug, PartialEq, Clone)]
 pub enum OptParseErrorKind {
+    HelpMessage,
+    VersionMessage,
+    //
     InvalidOption,
     MissingOption,
     //
@@ -82,6 +85,13 @@ impl OptParseError {
         r.desc2 = Some(a_desc2.to_string());
         r
     }
+    pub fn help_message(desc1: &str) -> Self {
+        Self::new_p1(OptParseErrorKind::HelpMessage, desc1)
+    }
+    pub fn version_message(desc1: &str) -> Self {
+        Self::new_p1(OptParseErrorKind::VersionMessage, desc1)
+    }
+    //
     pub fn invalid_option(desc1: &str) -> Self {
         Self::new_p1(OptParseErrorKind::InvalidOption, desc1)
     }
@@ -135,6 +145,10 @@ impl Display for OptParseError {
         use self::OptParseErrorKind::*;
         //
         let msg: &str = match self.kind {
+            HelpMessage | VersionMessage => {
+                return write!(fmt, "{}", &self.desc1);
+            }
+            //
             InvalidOption => "Invalid option",
             MissingOption => "Missing option",
             //

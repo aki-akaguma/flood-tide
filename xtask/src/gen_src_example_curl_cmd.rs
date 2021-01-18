@@ -115,6 +115,16 @@ pub struct CmdOptConf {
     pub arg_params: Vec<String>,
 }
 "#;
+    sss += r#"
+impl flood_tide::HelpVersion for CmdOptConf {
+    fn is_help(&self) -> bool {
+        self.flg_help
+    }
+    fn is_version(&self) -> bool {
+        self.flg_version
+    }
+}
+"#;
     //
     Ok(sss)
 }

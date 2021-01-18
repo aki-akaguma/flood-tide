@@ -6,6 +6,7 @@ use flood_tide::NameVal;
 use flood_tide::Opt;
 use flood_tide::OptNum;
 use flood_tide::OptParseError;
+use flood_tide::HelpVersion;
 
 //----------------------------------------------------------------------
 //{{{ TEXT
@@ -106,7 +107,18 @@ struct CmdOptConf {
     pub flag_not_each: bool,
     pub flag_unbuf: bool,
     //
+    pub flag_help: bool,
+    pub flag_version: bool,
+    //
     pub arg_params: Vec<String>,
+}
+impl HelpVersion for CmdOptConf {
+    fn is_help(&self) -> bool {
+        self.flag_help
+    }
+    fn is_version(&self) -> bool {
+        self.flag_version
+    }
 }
 
 //----------------------------------------------------------------------
@@ -283,6 +295,8 @@ mod example {
             " flag_linu_buf: false,",
             " flag_not_each: false,",
             " flag_unbuf: false,",
+            " flag_help: false,",
+            " flag_version: false,",
             " arg_params: [\"f1\", \"-\", \"f2\"] }"
         );
         assert_eq!(thing, expect);
@@ -333,6 +347,8 @@ mod example {
             " flag_linu_buf: true,",
             " flag_not_each: false,",
             " flag_unbuf: false,",
+            " flag_help: false,",
+            " flag_version: false,",
             " arg_params: [\"f1\", \"-\", \"f2\"] }"
         );
         assert_eq!(thing, expect);

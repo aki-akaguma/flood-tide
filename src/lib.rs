@@ -37,6 +37,12 @@ pub type OptNum = u8;
 
 pub use err::OptParseErrorKind;
 
+/// check help and version of conf
+pub trait HelpVersion {
+    fn is_help(&self) -> bool;
+    fn is_version(&self) -> bool;
+}
+
 /// Parse simple gnu style.
 ///
 ///
@@ -50,6 +56,7 @@ pub fn parse_simple_gnu_style<'a, T, F>(
 ) -> (Option<Vec<String>>, Result<(), OPErr>)
 where
     F: Fn(&mut T, &NameVal<'_>) -> Result<(), OptParseError>,
+    T: HelpVersion,
 {
     let lex = Lex::create_with(opt_ary, sho_idx_ary);
     let tokens = match lex.tokens_from(&args) {
@@ -71,6 +78,9 @@ where
                 #[cfg(not(feature = "single_error"))]
                 errs.push(err);
             }
+        }
+        if conf.is_help() || conf.is_version() {
+            break;
         }
     }
     //

@@ -5,6 +5,21 @@ mod test_0 {
     use flood_tide::err::OptParseErrorKind;
     //
     #[test]
+    fn test_help_message() {
+        let err = OptParseError::help_message("[usage] foofoo --opt arg1");
+        let thing = format!("{}", err);
+        let expect = "[usage] foofoo --opt arg1";
+        assert_eq!(thing, expect);
+    }
+    #[test]
+    fn test_version_message() {
+        let err = OptParseError::version_message("foofoo version 0.1.0");
+        let thing = format!("{}", err);
+        let expect = "foofoo version 0.1.0";
+        assert_eq!(thing, expect);
+    }
+    //
+    #[test]
     fn test_invalid_option() {
         let err = OptParseError::invalid_option("--abc");
         let thing = format!("{}", err);

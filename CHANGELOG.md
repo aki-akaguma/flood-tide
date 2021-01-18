@@ -2,6 +2,9 @@ TBD
 ===
 Unreleased changes. Release notes have not yet been written.
 
+* add help_message() and version_message() to OptParseError
+* add trait HelpVersion
+
 0.1.19 (2021-01-09)
 =====
 Feature:
