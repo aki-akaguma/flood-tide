@@ -21,6 +21,8 @@ use alloc::string::{String, ToString};
 #[cfg(feature = "no_std")]
 use alloc::vec::Vec;
 
+use crate::HelpVersion;
+
 #[derive(Debug, PartialEq, Clone)]
 pub enum OptParseErrorKind {
     HelpMessage,
@@ -58,6 +60,15 @@ pub struct OptParseError {
     kind: OptParseErrorKind,
     desc1: String,
     desc2: Option<String>,
+}
+
+impl HelpVersion for OptParseError {
+    fn is_help(&self) -> bool {
+        self.kind == OptParseErrorKind::HelpMessage
+    }
+    fn is_version(&self) -> bool {
+        self.kind == OptParseErrorKind::VersionMessage
+    }
 }
 
 impl OptParseError {
