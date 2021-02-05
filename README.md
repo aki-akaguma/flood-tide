@@ -39,6 +39,11 @@ in [examples](https://github.com/aki-akaguma/flood-tide/tree/main/examples) dire
 - single long options: ffmpeg.rs
 - source code generating by xtask and parse_simple_gnu_style(): curl.rs
 
+## Supports
+
+- [flood-tide-gen](https://crates.io/crates/flood-tide-gen) - the generating *flood-tide* tables
+- [aki-gsub](https://crates.io/crates/aki-gsub) - the sample used *flood-tide*
+
 ## Alternatives
 
 This parser is *not* a new special idea. It's just comparing characters one by one.
