@@ -22,7 +22,7 @@ mod plain {
             Long1 = 1,
             Long2 = 2,
             Long3 = 3,
-        };
+        }
         impl CmdOP {
             pub const fn to(self) -> OptNum {
                 self as OptNum
@@ -66,7 +66,7 @@ mod plain {
         #[derive(Debug, PartialEq)]
         enum CmdOP {
             Long1 = 1,
-        };
+        }
         impl CmdOP {
             pub const fn to(self) -> OptNum {
                 self as OptNum
@@ -114,7 +114,7 @@ mod plain {
         #[derive(Debug, PartialEq)]
         enum CmdOP {
             Long1 = 1,
-        };
+        }
         impl CmdOP {
             pub const fn to(self) -> OptNum {
                 self as OptNum
@@ -153,7 +153,7 @@ mod plain {
         #[derive(Debug, PartialEq)]
         enum CmdOP {
             Long4 = 1,
-        };
+        }
         impl CmdOP {
             pub const fn to(self) -> OptNum {
                 self as OptNum
@@ -192,7 +192,7 @@ mod plain {
         #[derive(Debug, PartialEq)]
         enum CmdOP {
             Long4 = 1,
-        };
+        }
         impl CmdOP {
             pub const fn to(self) -> OptNum {
                 self as OptNum
@@ -231,7 +231,7 @@ mod plain {
         #[derive(Debug, PartialEq)]
         enum CmdOP {
             Long4 = 1,
-        };
+        }
         impl CmdOP {
             pub const fn to(self) -> OptNum {
                 self as OptNum
@@ -271,7 +271,7 @@ mod plain {
         #[derive(Debug, PartialEq)]
         enum CmdOP {
             Long4 = 1,
-        };
+        }
         impl CmdOP {
             pub const fn to(self) -> OptNum {
                 self as OptNum
@@ -311,7 +311,7 @@ mod plain {
         #[derive(Debug, PartialEq)]
         enum CmdOP {
             Long4 = 1,
-        };
+        }
         impl CmdOP {
             pub const fn to(self) -> OptNum {
                 self as OptNum
@@ -363,7 +363,7 @@ mod plain {
         enum CmdOP {
             Long1 = 1,
             Long2 = 2,
-        };
+        }
         impl CmdOP {
             pub const fn to(self) -> OptNum {
                 self as OptNum
@@ -414,7 +414,7 @@ mod plain {
         enum CmdOP {
             Long1 = 1,
             Lon = 2,
-        };
+        }
         impl CmdOP {
             pub const fn to(self) -> OptNum {
                 self as OptNum
@@ -460,7 +460,7 @@ mod plain {
         enum CmdOP {
             Long1 = 1,
             Long = 2,
-        };
+        }
         impl CmdOP {
             pub const fn to(self) -> OptNum {
                 self as OptNum

@@ -1,15 +1,15 @@
-use optpa_util_5::OptParseError;
+use flood_tide::OptParseError;
 #[cfg(not(feature = "single_error"))]
-use optpa_util_5::OptParseErrors;
+use flood_tide::OptParseErrors;
 
-use optpa_util_5::Arg;
-use optpa_util_5::Lex;
-use optpa_util_5::NameVal;
-pub use optpa_util_5::OPErr;
-use optpa_util_5::Opt;
-use optpa_util_5::OptNum;
+use flood_tide::Arg;
+use flood_tide::Lex;
+use flood_tide::NameVal;
+pub use flood_tide::OpErr;
+use flood_tide::Opt;
+use flood_tide::OptNum;
 
-use optpa_util_5::check_sorted_opt_ary_and_sho_idx_ary_with;
+use flood_tide::check::check_sorted_opt_ary_and_sho_idx_ary_with;
 
 //----------------------------------------------------------------------
 const HELP_TEXT: &str = r#"

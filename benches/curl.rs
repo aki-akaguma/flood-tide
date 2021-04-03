@@ -1,15 +1,16 @@
-use optpa_util_5::OptParseError;
+use flood_tide::OptParseError;
 #[cfg(not(feature = "single_error"))]
-use optpa_util_5::OptParseErrors;
+use flood_tide::OptParseErrors;
 
-use optpa_util_5::Arg;
-use optpa_util_5::NameVal;
-pub use optpa_util_5::OPErr;
-use optpa_util_5::Opt;
-use optpa_util_5::OptNum;
+use flood_tide::Arg;
+use flood_tide::NameVal;
+pub use flood_tide::OpErr;
+use flood_tide::Opt;
+use flood_tide::OptNum;
 
-use optpa_util_5::check_sorted_opt_ary_and_sho_idx_ary_with;
-use optpa_util_5::parse_simple_gnu_style;
+use flood_tide::check::check_sorted_opt_ary_and_sho_idx_ary_with;
+use flood_tide::parse_simple_gnu_style;
+use flood_tide::HelpVersion;
 
 //----------------------------------------------------------------------
 include!("curl.cmd.help.rs.txt");
@@ -109,7 +110,7 @@ pub fn check_sorted_opt_ary_and_sho_idx_ary() -> bool {
     check_sorted_opt_ary_and_sho_idx_ary_with(&OPT_ARY, &OPT_ARY_SHO_IDX)
 }
 
-pub fn parse_cmdopts(program: &str, args: &[&str]) -> Result<CmdOptConf, OPErr> {
+pub fn parse_cmdopts(program: &str, args: &[&str]) -> Result<CmdOptConf, OpErr> {
     //
     let mut conf = CmdOptConf {
         opt_program: program.to_string(),
@@ -161,7 +162,7 @@ pub fn parse_cmdopts(program: &str, args: &[&str]) -> Result<CmdOptConf, OPErr> 
 
 //----------------------------------------------------------------------
 /*
-pub fn create_conf() -> Result<CmdOptConf, OPErr> {
+pub fn create_conf() -> Result<CmdOptConf, OpErr> {
     let mut env_args: Vec<String> = std::env::args().collect();
     let program = env_args.remove(0);
     let env_args: Vec<&str> = env_args.iter().map(std::string::String::as_str).collect();

@@ -1,6 +1,6 @@
 [package]
 name = "flood-tide"
-version = "0.1.21"
+version = "0.2.0"
 authors = ["aki <aki.akaguma@hotmail.com>"]
 description = "command line flag and option parse utilities"
 keywords = ["parse", "option", "command", "flag", "argument"]
@@ -19,6 +19,7 @@ plain_lo = ["plain", "long_only"]
 plain_lo_subc = ["plain", "long_only", "subcommand"]
 
 simple_gnu_style = ["plain", "abbreviate"]
+simple_gnu_style_subc = ["plain", "abbreviate", "subcommand"]
 no_std_plain = ["no_std", "plain"]
 
 dox = []
@@ -27,7 +28,7 @@ no_std = []
 argument = []
 option_argument = []
 stop_at_mm = []
-subcommand = []
+subcommand = ["stop_at_free"]
 
 long_only = []
 single_error = []

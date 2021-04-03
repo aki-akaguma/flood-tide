@@ -5,7 +5,7 @@ mod one;
 #[rustfmt::skip]
 const ENV_ARGS: [&str;6] = ["-d", "-vv", "-s", "123", "inp", "oup"];
 
-fn process_one(env_args: &[&str]) -> Result<one::CmdOptConf, one::OPErr> {
+fn process_one(env_args: &[&str]) -> Result<one::CmdOptConf, one::OpErr> {
     one::parse_cmdopts("prog", env_args)
 }
 

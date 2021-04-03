@@ -21,11 +21,11 @@ pub use err::OptParseErrors;
 
 /// Option parse error type
 #[cfg(any(not(feature = "single_error"), feature = "dox"))]
-pub type OPErr = OptParseErrors;
+pub type OpErr = OptParseErrors;
 
 /// Option parse error type
 #[cfg(feature = "single_error")]
-pub type OPErr = OptParseError;
+pub type OpErr = OptParseError;
 
 /// Option number type
 #[cfg(feature = "optnum_u16")]
@@ -43,9 +43,12 @@ pub trait HelpVersion {
     fn is_version(&self) -> bool;
 }
 
+/// setter subcmd of conf
+pub trait SubCommand {
+    fn set_subcmd(&mut self, subcmd: String);
+}
+
 /// Parse simple gnu style.
-///
-///
 #[cfg(any(feature = "stop_at_mm", feature = "dox"))]
 pub fn parse_simple_gnu_style<'a, T, F>(
     conf: &mut T,
@@ -53,7 +56,7 @@ pub fn parse_simple_gnu_style<'a, T, F>(
     sho_idx_ary: &'a [(u8, usize)],
     args: &'a [&'a str],
     parse_match: F,
-) -> (Option<Vec<String>>, Result<(), OPErr>)
+) -> (Option<Vec<String>>, Result<(), OpErr>)
 where
     F: Fn(&mut T, &NameVal<'_>) -> Result<(), OptParseError>,
     T: HelpVersion,
@@ -83,6 +86,65 @@ where
             break;
         }
     }
+    //
+    let mut v: Vec<String> = Vec::new();
+    v.extend(tokens.free.iter().map(|&s| s.to_string()));
+    //
+    #[cfg(feature = "single_error")]
+    return (Some(v), Ok(()));
+    #[cfg(not(feature = "single_error"))]
+    return (Some(v), Err(errs));
+}
+
+/// Parse simple gnu style with sub command.
+#[cfg(any(all(feature = "stop_at_mm", feature = "subcommand"), feature = "dox"))]
+pub fn parse_simple_gnu_style_subcmd<'a, T, F>(
+    conf: &mut T,
+    opt_ary: &'a [Opt],
+    sho_idx_ary: &'a [(u8, usize)],
+    args: &'a [&'a str],
+    parse_match: F,
+    subcmds: &'a [&'a str],
+) -> (Option<Vec<String>>, Result<(), OpErr>)
+where
+    F: Fn(&mut T, &NameVal<'_>) -> Result<(), OptParseError>,
+    T: HelpVersion + SubCommand,
+{
+    let lex = Lex::create_with(opt_ary, sho_idx_ary).subcmd(subcmds);
+    let tokens = match lex.tokens_from(&args) {
+        Ok(t) => t,
+        Err(errs) => {
+            return (None, Err(errs));
+        }
+    };
+    //
+    #[cfg(not(feature = "single_error"))]
+    let mut errs = OptParseErrors::new();
+    //
+    for nv in tokens.namevals.iter() {
+        match parse_match(conf, &nv) {
+            Ok(_) => {}
+            Err(err) => {
+                #[cfg(feature = "single_error")]
+                return (None, Err(err));
+                #[cfg(not(feature = "single_error"))]
+                errs.push(err);
+            }
+        }
+        if conf.is_help() || conf.is_version() {
+            break;
+        }
+    }
+    //
+    match tokens.subcmd {
+        Some(s) => conf.set_subcmd(String::from(s)),
+        None => {
+            #[cfg(feature = "single_error")]
+            return (None, Err(OptParseError::missing_subcommand("<command>")));
+            #[cfg(not(feature = "single_error"))]
+            errs.push(OptParseError::missing_subcommand("<command>"));
+        }
+    };
     //
     let mut v: Vec<String> = Vec::new();
     v.extend(tokens.free.iter().map(|&s| s.to_string()));
@@ -243,9 +305,9 @@ impl<'a> Lex<'a> {
         self
     }
     /// analyze and return tokens
-    pub fn tokens_from(&'a self, args: &'a [&'a str]) -> Result<Tokens<'a>, OPErr> {
+    pub fn tokens_from(&'a self, args: &'a [&'a str]) -> Result<Tokens<'a>, OpErr> {
         #[cfg(not(feature = "single_error"))]
-        let mut v_errs = OPErr::new();
+        let mut v_errs = OpErr::new();
         let mut v_free: Vec<&str> = Vec::new();
         let mut v_namevals: Vec<NameVal> = Vec::new();
         //
@@ -493,9 +555,9 @@ impl<'a> Lex<'a> {
         _cursor: &mut dyn Iterator<Item = &&'a str>,
         tail: &'a str,
         namevals: &mut Vec<NameVal<'a>>,
-    ) -> Result<(), OPErr> {
+    ) -> Result<(), OpErr> {
         #[cfg(not(feature = "single_error"))]
-        let mut errs = OPErr::new();
+        let mut errs = OpErr::new();
         let tail_len = tail.len();
         '_ic_iter: for i in 0..tail_len {
             let c_name = &tail[i..=i];
@@ -573,7 +635,7 @@ impl<'a> Lex<'a> {
         mut cursor: &mut dyn Iterator<Item = &'a &'a str>,
         cur: &'a str,
         mut namevals: &mut Vec<NameVal<'a>>,
-    ) -> Result<(), OPErr> {
+    ) -> Result<(), OpErr> {
         if cur.len() == 2 {
             //  "-f"
             // short name
@@ -594,7 +656,7 @@ impl<'a> Lex<'a> {
                             return Err(err);
                             #[cfg(not(feature = "single_error"))]
                             {
-                                let mut errs = OPErr::new();
+                                let mut errs = OpErr::new();
                                 errs.push(err);
                                 return Err(errs);
                             }
@@ -612,7 +674,7 @@ impl<'a> Lex<'a> {
                     return Err(err);
                     #[cfg(not(feature = "single_error"))]
                     {
-                        let mut errs = OPErr::new();
+                        let mut errs = OpErr::new();
                         errs.push(err);
                         return Err(errs);
                     }

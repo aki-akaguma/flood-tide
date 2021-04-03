@@ -23,7 +23,7 @@ mod plain {
             B = 2,
             C = 3,
             D = 4,
-        };
+        }
         impl CmdOP {
             pub const fn to(self) -> OptNum {
                 self as OptNum
@@ -79,7 +79,7 @@ mod plain {
         #[derive(Debug, PartialEq)]
         enum CmdOP {
             A = 1,
-        };
+        }
         impl CmdOP {
             pub const fn to(self) -> OptNum {
                 self as OptNum
@@ -123,7 +123,7 @@ mod plain {
         #[derive(Debug, PartialEq)]
         enum CmdOP {
             A = 1,
-        };
+        }
         impl CmdOP {
             pub const fn to(self) -> OptNum {
                 self as OptNum
@@ -169,7 +169,7 @@ mod plain {
         #[derive(Debug, PartialEq)]
         enum CmdOP {
             A = 1,
-        };
+        }
         impl CmdOP {
             pub const fn to(self) -> OptNum {
                 self as OptNum
@@ -210,7 +210,7 @@ mod plain {
         enum CmdOP {
             A = 1,
             B = 2,
-        };
+        }
         impl CmdOP {
             pub const fn to(self) -> OptNum {
                 self as OptNum
@@ -259,7 +259,7 @@ mod plain {
         enum CmdOP {
             A = 1,
             B = 2,
-        };
+        }
         impl CmdOP {
             pub const fn to(self) -> OptNum {
                 self as OptNum

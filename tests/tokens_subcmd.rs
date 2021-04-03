@@ -26,7 +26,7 @@ mod subcommand {
             Long1 = 1,
             Long2 = 2,
             Long3 = 3,
-        };
+        }
         impl CmdOP {
             pub const fn to(self) -> OptNum {
                 self as OptNum
@@ -80,7 +80,7 @@ mod subcommand {
             Long1 = 1,
             Long2 = 2,
             Long3 = 3,
-        };
+        }
         impl CmdOP {
             pub const fn to(self) -> OptNum {
                 self as OptNum
@@ -127,7 +127,7 @@ mod subcommand {
             Long1 = 1,
             Long2 = 2,
             Long3 = 3,
-        };
+        }
         impl CmdOP {
             pub const fn to(self) -> OptNum {
                 self as OptNum
@@ -181,7 +181,7 @@ mod subcommand {
             Long1 = 1,
             Long2 = 2,
             Long3 = 3,
-        };
+        }
         impl CmdOP {
             pub const fn to(self) -> OptNum {
                 self as OptNum
@@ -249,7 +249,7 @@ mod subcommand {
             Long1 = 1,
             Long2 = 2,
             Long3 = 3,
-        };
+        }
         impl CmdOP {
             pub const fn to(self) -> OptNum {
                 self as OptNum
@@ -306,7 +306,7 @@ mod subcommand {
             Long1 = 1,
             Long2 = 2,
             Long3 = 3,
-        };
+        }
         impl CmdOP {
             pub const fn to(self) -> OptNum {
                 self as OptNum
@@ -360,7 +360,7 @@ mod subcommand {
             Long1 = 1,
             Long2 = 2,
             Long3 = 3,
-        };
+        }
         impl CmdOP {
             pub const fn to(self) -> OptNum {
                 self as OptNum

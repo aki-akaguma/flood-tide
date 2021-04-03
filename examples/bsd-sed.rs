@@ -2,11 +2,11 @@
 
 use flood_tide::parse_simple_gnu_style;
 use flood_tide::Arg;
+use flood_tide::HelpVersion;
 use flood_tide::NameVal;
 use flood_tide::Opt;
 use flood_tide::OptNum;
 use flood_tide::OptParseError;
-use flood_tide::HelpVersion;
 
 //----------------------------------------------------------------------
 //{{{ TEXT

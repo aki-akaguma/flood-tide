@@ -57,7 +57,7 @@ mod basic {
             Date = 4,
             Eat = 5,
             F = 6,
-        };
+        }
         impl CmdOP {
             pub const fn to(self) -> OptNum {
                 self as OptNum
@@ -148,7 +148,7 @@ mod basic {
             Date = 4,
             Eat = 5,
             F = 6,
-        };
+        }
         impl CmdOP {
             pub const fn to(self) -> OptNum {
                 self as OptNum
@@ -235,7 +235,7 @@ mod basic {
             S = 1,
             Long2 = 2,
             Long3 = 3,
-        };
+        }
         impl CmdOP {
             pub const fn to(self) -> OptNum {
                 self as OptNum

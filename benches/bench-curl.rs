@@ -10,7 +10,7 @@ const ENV_ARGS: [&str;15] = [
     "--socks5-gssapi-service", "name1", "-y", "1000", "--sslv3",
     "http://url1.com"];
 
-fn process_one(env_args: &[&str]) -> Result<curl::CmdOptConf, curl::OPErr> {
+fn process_one(env_args: &[&str]) -> Result<curl::CmdOptConf, curl::OpErr> {
     curl::parse_cmdopts("prog", env_args)
 }
 

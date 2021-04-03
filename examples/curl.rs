@@ -3,7 +3,7 @@
 use flood_tide::parse_simple_gnu_style;
 use flood_tide::Arg;
 use flood_tide::NameVal;
-use flood_tide::OPErr;
+use flood_tide::OpErr;
 use flood_tide::Opt;
 use flood_tide::OptNum;
 use flood_tide::OptParseError;
@@ -105,7 +105,7 @@ fn parse_match(conf: &mut CmdOptConf, nv: &NameVal<'_>) -> Result<(), OptParseEr
     Ok(())
 }
 
-fn parse_cmdopts(program: &str, args: Vec<&str>) -> Result<CmdOptConf, OPErr> {
+fn parse_cmdopts(program: &str, args: Vec<&str>) -> Result<CmdOptConf, OpErr> {
     //
     let mut conf = CmdOptConf {
         opt_program: program.to_string(),
@@ -156,7 +156,7 @@ fn parse_cmdopts(program: &str, args: Vec<&str>) -> Result<CmdOptConf, OPErr> {
 }
 
 //----------------------------------------------------------------------
-fn create_conf() -> Result<CmdOptConf, OPErr> {
+fn create_conf() -> Result<CmdOptConf, OpErr> {
     let mut env_args: Vec<String> = std::env::args().collect();
     let program = env_args.remove(0);
     let env_args: Vec<&str> = env_args.iter().map(std::string::String::as_str).collect();

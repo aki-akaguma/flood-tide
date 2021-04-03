@@ -189,7 +189,7 @@ mod fmt_debug {
             Name = 1,
             Section = 2,
             Info = 3,
-        };
+        }
         impl CmdOP {
             pub const fn to(self) -> OptNum {
                 self as OptNum
@@ -262,7 +262,7 @@ mod fmt_debug {
             Name = 1,
             Section = 2,
             Info = 3,
-        };
+        }
         impl CmdOP {
             pub const fn to(self) -> OptNum {
                 self as OptNum
@@ -334,7 +334,7 @@ mod fmt_debug {
             Name = 1,
             Section = 2,
             Info = 3,
-        };
+        }
         impl CmdOP {
             pub const fn to(self) -> OptNum {
                 self as OptNum
