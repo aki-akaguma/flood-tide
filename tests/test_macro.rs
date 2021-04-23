@@ -8,6 +8,17 @@ macro_rules! assert_eq_tokens_namevals {
         };
         assert_eq!(nmvl.opt.sho, $st_nm);
         assert_eq!(nmvl.opt.lon, $lg_nm);
+        if !nmvl.opt.lon.is_empty() {
+            assert_eq!(nmvl.opt.lon_or_sho(), $lg_nm);
+        } else {
+            let s = if $st_nm != 0_u8 {
+                let v = vec![$st_nm];
+                String::from_utf8_lossy(&v).to_string()
+            } else {
+                "".to_string()
+            };
+            assert_eq!(nmvl.opt.lon_or_sho(), s);
+        }
         #[cfg(feature = "option_argument")]
         assert_eq!(nmvl.val, $val);
         assert_eq!(nmvl.opt.num, $num as OptNum);

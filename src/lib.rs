@@ -201,6 +201,19 @@ pub struct Opt<'a> {
     /// uniq number
     pub num: OptNum,
 }
+impl<'a> Opt<'a> {
+    /// long or short name
+    pub fn lon_or_sho(&self) -> String {
+        if !self.lon.is_empty() {
+            self.lon.to_string()
+        } else if self.sho != 0_u8 {
+            let v = vec![self.sho];
+            String::from_utf8_lossy(&v).to_string()
+        } else {
+            "".to_string()
+        }
+    }
+}
 
 /// Entity as the result of lex
 #[derive(Debug)]

@@ -2,6 +2,11 @@ TBD
 ===
 Unreleased changes. Release notes have not yet been written.
 
+0.2.1 (2021-04-23)
+=====
+
+* add fn Opt::lon_or_sho()
+
 0.2.0 (2021-04-03)
 =====
 
