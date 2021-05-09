@@ -1,10 +1,10 @@
 [package]
 name = "xtask"
 version = "0.1.0"
-authors = ["Hidetoshi <hchacha@users.sourceforge.net>"]
+authors = ["aki <aki.akaguma@hotmail.com>"]
 edition = "2018"
 
 [dependencies]
 anyhow = "1.0"
-regex = "1.4"
-itertools = "0.9"
+regex = "1.5"
+itertools = "0.10"
