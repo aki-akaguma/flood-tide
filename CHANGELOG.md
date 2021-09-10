@@ -2,6 +2,11 @@ TBD
 ===
 Unreleased changes. Release notes have not yet been written.
 
+0.2.3 (2021-09-10)
+=====
+
+* update dates: criterion(0.3.5)
+
 0.2.2 (2021-05-09)
 =====
 
