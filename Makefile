@@ -22,7 +22,12 @@ endef
 $(foreach log,$(features_comb),$(eval LOGS=$(LOGS) target/z.test/z.test-$(log).log))
 
 all:
-	@echo "make [clean|test]"
+	@echo "make [clean|test|readme]"
+
+readme: README.md
+
+README.md: README.tpl src/lib.rs
+	cargo readme > $@
 
 test: $(LOGS)
 

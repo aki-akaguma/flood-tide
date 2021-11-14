@@ -1,5 +1,63 @@
-//! Command line flag and option parse utilities.
+/*!
+Command line flag and option parse utilities.
 
+# Features
+
+- `no_std` and `std` are supported.
+- flags, options, subcommand and free arguments
+- short flags and options (like `-a`)
+- long flags and options (like `--long`)
+- combined short flags (like `-abc` ::= `-a` `-b` `-c`)
+- single long options (like `-long`)
+- abbreviate long options (like `--abbr` ::= `--abbreviate`)
+- single error or multiple errors
+- only UTF-8 arguments
+- it can be used optimally by a compile switch with many features.
+- minimum support: rustc 1.41.1 (f3e1a954d 2020-02-24)
+
+# Todos
+
+- [x] multiple errors
+- [x] `no_std`
+- [ ] option suggestion (do you mean? '--abc')
+- [ ] windows style (like `/a`)
+- [ ] source code generator support tools
+- [ ] more easy use
+
+# Non-Supports
+
+- procedural macro style
+- traditional macro style
+- non UTF-8 arguments, multibyte or wide charactor
+
+# Examples
+
+in [examples](https://github.com/aki-akaguma/flood-tide/tree/main/examples) directory.
+
+- manual coding style: bsd-sed.rs, gnu-cat.rs
+- single long options: ffmpeg.rs
+- source code generating by xtask and parse_simple_gnu_style(): curl.rs
+
+# Supports
+
+- [flood-tide-gen](https://crates.io/crates/flood-tide-gen) - the generating *flood-tide* tables
+- [aki-gsub](https://crates.io/crates/aki-gsub) - the sample used *flood-tide*
+
+# Alternatives
+
+This parser is *not* a new special idea. It's just comparing characters one by one.
+Is there anything simpler than this?
+
+- [clap](https://crates.io/crates/clap) - is the most popular and complete one
+- [structopt](https://crates.io/crates/structopt) - clap parser that uses procedural macros
+- [gumdrop](https://crates.io/crates/gumdrop) - a simple parser that uses procedural macros
+- [argh](https://crates.io/crates/argh) - procedural macros
+- [rustop](https://crates.io/crates/rustop) - traditional macro
+- [pico-args](https://crates.io/crates/pico-args) - a simple use
+- [getopts](https://crates.io/crates/getopts) - a simple use
+- [docopt](https://crates.io/crates/docopt) - a simple use
+
+*/
 #![cfg_attr(feature = "no_std", no_std)]
 #![allow(unused_labels)]
 
