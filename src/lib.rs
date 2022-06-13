@@ -13,7 +13,7 @@ Command line flag and option parse utilities.
 - single error or multiple errors
 - only UTF-8 arguments
 - it can be used optimally by a compile switch with many features.
-- minimum support: rustc 1.41.1 (f3e1a954d 2020-02-24)
+- minimum support rustc 1.56.1 (59eed8a2a 2021-11-01)
 
 # Todos
 
