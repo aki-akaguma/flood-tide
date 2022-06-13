@@ -1,6 +1,9 @@
-TBD
+TBD: flood-tide
 ===
 Unreleased changes. Release notes have not yet been written.
+
+0.2.5 (2022-06-13)
+=====
 
 * changes to edition 2021
 
