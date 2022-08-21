@@ -2,6 +2,9 @@ TBD: flood-tide
 ===
 Unreleased changes. Release notes have not yet been written.
 
+* fix clippy: you are deriving `PartialEq` and can implement `Eq`
+* fix clippy: format_push_string
+
 0.2.5 (2022-06-13)
 =====
 

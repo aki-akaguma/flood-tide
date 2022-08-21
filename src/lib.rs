@@ -120,7 +120,7 @@ where
     T: HelpVersion,
 {
     let lex = Lex::create_with(opt_ary, sho_idx_ary);
-    let tokens = match lex.tokens_from(&args) {
+    let tokens = match lex.tokens_from(args) {
         Ok(t) => t,
         Err(errs) => {
             return (None, Err(errs));
@@ -131,7 +131,7 @@ where
     let mut errs = OptParseErrors::new();
     //
     for nv in tokens.namevals.iter() {
-        match parse_match(conf, &nv) {
+        match parse_match(conf, nv) {
             Ok(_) => {}
             Err(err) => {
                 #[cfg(feature = "single_error")]
@@ -215,7 +215,7 @@ where
 
 /// Option argument
 #[repr(u8)]
-#[derive(Debug, Clone, Copy, PartialEq)]
+#[derive(Debug, Clone, Copy, PartialEq, Eq)]
 pub enum Arg {
     No = 0,
     Yes,
@@ -247,7 +247,7 @@ pub enum Arg {
 ///     ];
 /// }
 ///
-#[derive(Debug, Clone, Copy, PartialEq)]
+#[derive(Debug, Clone, Copy, PartialEq, Eq)]
 pub struct Opt<'a> {
     /// short name
     pub sho: u8,

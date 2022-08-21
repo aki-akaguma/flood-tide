@@ -23,7 +23,7 @@ use alloc::vec::Vec;
 
 use crate::HelpVersion;
 
-#[derive(Debug, PartialEq, Clone)]
+#[derive(Debug, Clone, PartialEq, Eq)]
 pub enum OptParseErrorKind {
     HelpMessage,
     VersionMessage,
@@ -55,7 +55,7 @@ pub enum OptParseErrorKind {
 }
 
 /// Single option parse error
-#[derive(Debug, PartialEq)]
+#[derive(Debug, PartialEq, Eq)]
 pub struct OptParseError {
     kind: OptParseErrorKind,
     desc1: String,
@@ -196,7 +196,7 @@ impl Display for OptParseError {
 impl std::error::Error for OptParseError {}
 
 /// Multiple option parse errors
-#[derive(Debug, PartialEq)]
+#[derive(Debug, PartialEq, Eq)]
 pub struct OptParseErrors(Vec<OptParseError>);
 
 impl OptParseErrors {
@@ -226,12 +226,14 @@ impl Default for OptParseErrors {
 }
 impl Display for OptParseErrors {
     fn fmt(&self, fmt: &mut Formatter) -> Result<(), Error> {
+        use std::fmt::Write;
+        //
         if self.is_empty() {
             write!(fmt, "")
         } else {
             let mut s = String::new();
             for err in self.iter() {
-                s += &format!("{}\n", err);
+                let _ = writeln!(s, "{}", err);
             }
             write!(fmt, "{}", &s[0..(s.len() - 1)])
         }
