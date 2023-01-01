@@ -44,8 +44,8 @@ features = ["dox"]
 [dependencies]
 
 [dev-dependencies]
-criterion = "0.3"
-criterion-cycles-per-byte = "0.1"
+criterion = "0.4"
+criterion-cycles-per-byte = "0.4"
 
 [workspace]
 members = [
