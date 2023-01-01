@@ -2,6 +2,9 @@ TBD: flood-tide
 ===
 Unreleased changes. Release notes have not yet been written.
 
+0.2.6 (2023-01-02)
+=====
+
 * update crates: criterion(0.4)
 * fix clippy: you are deriving `PartialEq` and can implement `Eq`
 * fix clippy: format_push_string
