@@ -21,7 +21,7 @@ endef
 
 $(foreach log,$(features_comb),$(eval LOGS=$(LOGS) target/z.test/z.test-$(log).log))
 
-all:
+all: readme
 	@echo "make [clean|test|readme]"
 
 readme: README.md

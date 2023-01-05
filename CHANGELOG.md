@@ -1,191 +1,207 @@
-TBD: flood-tide
-===
-Unreleased changes. Release notes have not yet been written.
+# Changelog: flood-tide
 
-0.2.6 (2023-01-02)
-=====
+All notable changes to this project will be documented in this file.
 
+The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
+and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
+
+## Unreleased
+
+
+## 0.2.7 (2023-01-05)
+### Changed
+* reformat `README.md`
+
+## 0.2.6 (2023-01-02)
+### Changed
 * update crates: criterion(0.4)
-* fix clippy: you are deriving `PartialEq` and can implement `Eq`
-* fix clippy: format_push_string
 
-0.2.5 (2022-06-13)
-=====
+### Fixed
+* clippy: you are deriving `PartialEq` and can implement `Eq`
+* clippy: format_push_string
 
+## 0.2.5 (2022-06-13)
+### Changed
 * changes to edition 2021
 
-0.2.4 (2021-11-14)
-=====
+## 0.2.4 (2021-11-14)
+### Added
+* more documents
 
+### Changed
 * clean source codes
-* add more documents
 
-0.2.3 (2021-09-10)
-=====
-
+## 0.2.3 (2021-09-10)
+### Changed
 * update dates: criterion(0.3.5)
 
-0.2.2 (2021-05-09)
-=====
-
+## 0.2.2 (2021-05-09)
+### Changed
 * update depends: regex(1.5.4)
 
-0.2.1 (2021-04-23)
-=====
-
+## 0.2.1 (2021-04-23)
+### Added
 * add fn Opt::lon_or_sho()
 
-0.2.0 (2021-04-03)
-=====
-
+## 0.2.0 (2021-04-03)
+### Added
 * add trait SubCommand
-* rename OPErr to OpErr
-* remove unnecessary trailing semicolon
 * add simple_gnu_style_subc into features
 * add fn parse_simple_gnu_style_subcmd()
+
+### Changed
+* rename OPErr to OpErr
 * update depends
 
-* bug fix: if the scann has subcmd, then it should stop at free.
-* bug fix: can not compile benches
+### Fixed
+* bug: if the scann has subcmd, then it should stop at free.
+* bug: can not compile benches
 
-0.1.21 (2021-02-05)
-=====
+### Removed
+* remove unnecessary trailing semicolon
 
+## 0.1.21 (2021-02-05)
+### Changed
 * modify README.md
 
-0.1.20 (2021-01-31)
-=====
-
+## 0.1.20 (2021-01-31)
+### Added
 * add impl HelpVersion for OptParseError
 * add help_message() and version_message() to OptParseError
 * add trait HelpVersion
 
-0.1.19 (2021-01-09)
-=====
-
+## 0.1.19 (2021-01-09)
+### Added
 * add "dox" into features
-* bug fix README.md
 
-0.1.18 (2021-01-03)
-=====
+### Fixed
+* bug: README.md
 
+## 0.1.18 (2021-01-03)
+### Changed
 * update rustc 1.49.0 (e1884a8e3 2020-12-29)
 
-0.1.17 (2020-12-25)
-=====
+## 0.1.17 (2020-12-25)
+### Fixed
+* README.md
 
-* fix README.md
-
-0.1.16 (2020-12-25)
-=====
-
+## 0.1.16 (2020-12-25)
+### Changed
 * publish to crates.io
 
-0.1.15 (2020-12-25)
-=====
-
+## 0.1.15 (2020-12-25)
+### Changed
 * rename package flood-tide from optpa-util-5
 
-0.1.14 (2020-12-20)
-=====
-
+## 0.1.14 (2020-12-20)
+### Added
 * add Lex::create_with()
-* delete Lex::create_from()
-* delete from features: sorted_opt_ary, create_with
 * add create_with to features
 * add sorted_opt_ary to features
 
-0.1.13 (2020-12-18)
-=====
+### Removed
+* delete Lex::create_from()
+* delete from features: sorted_opt_ary, create_with
 
+## 0.1.13 (2020-12-18)
+### Added
 * add to features: stop_at_mm, stop_at_free, no_std
-* del from features: std
 
-0.1.12 (2020-12-09)
-=====
+### Removed
+* remove from features: std
 
+## 0.1.12 (2020-12-09)
+### Changed
 * impl std::error::Error for OptParseErrors
 
-0.1.11 (2020-12-06)
-=====
-
+## 0.1.11 (2020-12-06)
+### Changed
 * import optpaerr-5("0.1.6" (2020-12-05))
 * README.txt is added and edited
 * replace crate combination("0.1.2") to itertools("0.9") in xtask
 
-0.1.10 (2020-12-04)
-=====
-
-* modify some examples
+## 0.1.10 (2020-12-04)
+### Added
 * add error message with file name to xtask::update_file()
-* fix clippy: xtask/src/gen_features_combination.rs
-* fix clippy: examples/curl.rs
 
-0.1.9 (2020-12-02)
-=====
+### Changed
+* modify some examples
 
-* change examples new style
+### Fixed
+* clippy: xtask/src/gen_features_combination.rs
+* clippy: examples/curl.rs
+
+## 0.1.9 (2020-12-02)
+### Added
 * add fn parse_simple_gnu_style()
-* bugfix: examples/curl.rs and xtask
+
+### Changed
+* change examples new style
 * refactoring source code
 
-0.1.8 (2020-11-28)
-=====
+### Fixed
+* bug: examples/curl.rs and xtask
 
+## 0.1.8 (2020-11-28)
+### Added
 * add gen_features_combination to xtask
 * add optnum_u16 to \[features]
 * add bench-one.rs
+
+### Changed
 * change to public: pub struct CmdOptConf, on examples/curl.rs
 
-0.1.7 (2020-11-25)
-=====
-
-* change Vec<&str> to &\[&str] at the param type of tokens_from()
-* remove scripts/gen-parser-curl.pl
-* refactoring xtask's gen_src_example_curl_cmd
+## 0.1.7 (2020-11-25)
+### Added
 * add xtask for example curl
 * add example curl
 
-0.1.6 (2020-11-18)
-=====
+### Changed
+* change Vec<&str> to &\[&str] at the param type of tokens_from()
+* refactoring xtask's gen_src_example_curl_cmd
 
+### Removed
+* remove scripts/gen-parser-curl.pl
+
+## 0.1.6 (2020-11-18)
+### Added
 * add README.md, COPYING, LICENSE-APACHE, LICENSE-MIT
 * add no_std
 * add example gnu-cat
+
+### Changed
 * rename repo: optpa-util to optpa-util-1
 
-0.1.5 (2020-10-29)
-=====
-
+## 0.1.5 (2020-10-29)
+### Added
 * add NameVal.name()
 
-0.1.4 (2020-10-05)
-=====
-
-* fix: argument features
+## 0.1.4 (2020-10-05)
+### Added
 * add option_argument to features
 * add example/ffmpeg
 * add example/bsd-sed
 * add examples
 
-0.1.3 (2020-09-20)
-=====
+### Fixed
+* argument features
 
+## 0.1.3 (2020-09-20)
+### Changed
 * refactoring
 * change 'is_long' to 'was_long'
 
-0.1.2 (2020-09-17)
-=====
-
+## 0.1.2 (2020-09-17)
+### Changed
 * fork optpa-util
 * a lot of things
 
-0.1.1 (2018-05-22)
-=====
-
+## 0.1.1 (2018-05-22)
+### Changed
 * rename optpa_util to optpa-util
-* fix dependencies
 
-0.1.0 (2017-11-06)
-=====
-first commit
+### Fixed
+* dependencies
+
+## 0.1.0 (2017-11-06)
+* first commit
