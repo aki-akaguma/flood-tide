@@ -55,12 +55,13 @@ gen-clean:
 	rm -f $(example_curl_gen)
 
 examples/curl.cmd.match.rs.txt: examples/curl.cmd.txt
-	#./scripts/gen-parser-curl.pl gen_match > $@
-	cargo xtask gen-src-example-curl-cmd-match
+	cargo xtask gen-src-example-curl-cmd
 
 examples/curl.cmd.help.rs.txt: examples/curl.cmd.txt
-	#./scripts/gen-parser-curl.pl gen_help > $@
-	cargo xtask gen-src-example-curl-cmd-help
+	cargo xtask gen-src-example-curl-cmd
+
+bench:
+	cargo bench --bench=bench-curl --features=option_argument,abbreviate,argument,stop_at_mm
 
 test-all-features: $(LOGS)
 

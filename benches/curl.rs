@@ -10,7 +10,6 @@ use flood_tide::OptNum;
 
 use flood_tide::check::check_sorted_opt_ary_and_sho_idx_ary_with;
 use flood_tide::parse_simple_gnu_style;
-use flood_tide::HelpVersion;
 
 //----------------------------------------------------------------------
 include!("curl.cmd.help.rs.txt");

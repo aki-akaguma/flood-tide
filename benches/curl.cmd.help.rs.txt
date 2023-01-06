@@ -950,7 +950,7 @@ pub struct CmdOptConf {
     pub arg_params: Vec<String>,
 }
 
-impl HelpVersion for CmdOptConf {
+impl flood_tide::HelpVersion for CmdOptConf {
     fn is_help(&self) -> bool {
         self.flg_help
     }

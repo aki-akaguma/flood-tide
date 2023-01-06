@@ -11,6 +11,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 * rust-version = "1.57.0" into Cargo.toml
 * `all-test-version` target into Makefile
 
+### Changed
+* update examples/curl.cmd.txt
+
 
 ## [0.2.7] (2023-01-05)
 ### Changed

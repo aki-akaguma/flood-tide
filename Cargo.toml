@@ -53,6 +53,9 @@ members = [
     "xtask",
 ]
 
+[profile.release]
+lto = true
+
 [[bench]]
 name = "bench-one"
 harness = false
