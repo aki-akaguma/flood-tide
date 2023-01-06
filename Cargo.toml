@@ -8,7 +8,7 @@ categories = ["command-line-interface"]
 license = "MIT OR Apache-2.0"
 readme = "README.md"
 edition = "2021"
-rust-version = "1.56.0"
+rust-version = "1.57.0"
 repository = "https://github.com/aki-akaguma/flood-tide"
 
 [features]

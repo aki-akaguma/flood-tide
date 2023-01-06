@@ -6,11 +6,22 @@ mod size_check {
     #[test]
     fn test_size() {
         assert_eq!(std::mem::size_of::<OptParseErrorKind>(), 1);
-        assert_eq!(std::mem::size_of::<OptParseError>(), 56);
-        assert_eq!(std::mem::size_of::<OptParseErrors>(), 24);
-        //
-        assert_eq!(std::mem::size_of::<String>(), 24);
-        assert_eq!(std::mem::size_of::<Option<String>>(), 24);
+        #[cfg(target_pointer_width = "64")]
+        {
+            assert_eq!(std::mem::size_of::<OptParseError>(), 56);
+            assert_eq!(std::mem::size_of::<OptParseErrors>(), 24);
+            //
+            assert_eq!(std::mem::size_of::<String>(), 24);
+            assert_eq!(std::mem::size_of::<Option<String>>(), 24);
+        }
+        #[cfg(target_pointer_width = "32")]
+        {
+            assert_eq!(std::mem::size_of::<OptParseError>(), 28);
+            assert_eq!(std::mem::size_of::<OptParseErrors>(), 12);
+            //
+            assert_eq!(std::mem::size_of::<String>(), 12);
+            assert_eq!(std::mem::size_of::<Option<String>>(), 12);
+        }
     }
 }
 mod fmt_debug {

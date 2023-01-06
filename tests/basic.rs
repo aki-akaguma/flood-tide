@@ -13,28 +13,64 @@ mod basic {
     //
     #[test]
     fn size_of() {
-        assert_eq!(std::mem::size_of::<&str>(), 16);
-        assert_eq!(std::mem::size_of::<Option<&str>>(), 16);
-        assert_eq!(std::mem::size_of::<String>(), 24);
-        assert_eq!(std::mem::size_of::<Option<String>>(), 24);
-        assert_eq!(std::mem::size_of::<Vec<&str>>(), 24);
+        #[cfg(target_pointer_width = "64")]
+        {
+            assert_eq!(std::mem::size_of::<&str>(), 16);
+            assert_eq!(std::mem::size_of::<Option<&str>>(), 16);
+            assert_eq!(std::mem::size_of::<String>(), 24);
+            assert_eq!(std::mem::size_of::<Option<String>>(), 24);
+            assert_eq!(std::mem::size_of::<Vec<&str>>(), 24);
+            assert_eq!(std::mem::size_of::<Opt>(), 24);
+        }
+        #[cfg(target_pointer_width = "32")]
+        {
+            assert_eq!(std::mem::size_of::<&str>(), 8);
+            assert_eq!(std::mem::size_of::<Option<&str>>(), 8);
+            assert_eq!(std::mem::size_of::<String>(), 12);
+            assert_eq!(std::mem::size_of::<Option<String>>(), 12);
+            assert_eq!(std::mem::size_of::<Vec<&str>>(), 12);
+            assert_eq!(std::mem::size_of::<Opt>(), 12);
+        }
         //
         assert_eq!(std::mem::size_of::<Arg>(), 1);
-        assert_eq!(std::mem::size_of::<Opt>(), 24);
         //
-        let len = 8;
-        #[cfg(feature = "option_argument")]
-        let len = len + 16;
-        #[cfg(feature = "was_long")]
-        let len = len + 8;
-        assert_eq!(std::mem::size_of::<NameVal>(), len);
+        #[cfg(target_pointer_width = "64")]
+        {
+            let len = 8;
+            #[cfg(feature = "option_argument")]
+            let len = len + 16;
+            #[cfg(feature = "was_long")]
+            let len = len + 8;
+            assert_eq!(std::mem::size_of::<NameVal>(), len);
+        }
+        #[cfg(target_pointer_width = "32")]
+        {
+            let len = 4;
+            #[cfg(feature = "option_argument")]
+            let len = len + 8;
+            #[cfg(feature = "was_long")]
+            let len = len + 4;
+            assert_eq!(std::mem::size_of::<NameVal>(), len);
+        }
         //
-        let len = 48;
-        #[cfg(feature = "stop_at_mm")]
-        let len = len + 8;
-        #[cfg(feature = "subcommand")]
-        let len = len + 16;
-        assert_eq!(std::mem::size_of::<Tokens>(), len);
+        #[cfg(target_pointer_width = "64")]
+        {
+            let len = 48;
+            #[cfg(feature = "stop_at_mm")]
+            let len = len + 8;
+            #[cfg(feature = "subcommand")]
+            let len = len + 16;
+            assert_eq!(std::mem::size_of::<Tokens>(), len);
+        }
+        #[cfg(target_pointer_width = "32")]
+        {
+            let len = 24;
+            #[cfg(feature = "stop_at_mm")]
+            let len = len + 4;
+            #[cfg(feature = "subcommand")]
+            let len = len + 8;
+            assert_eq!(std::mem::size_of::<Tokens>(), len);
+        }
     }
 
     //{{{ complex tests
