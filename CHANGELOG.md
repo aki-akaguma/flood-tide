@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 * version difference link into `CHANGELOG.md`
 * rust-version = "1.57.0" into Cargo.toml
 * `all-test-version` target into Makefile
+* badges into README.tpl
 
 ### Changed
 * update examples/curl.cmd.txt
