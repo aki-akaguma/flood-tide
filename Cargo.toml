@@ -8,7 +8,7 @@ categories = ["command-line-interface"]
 license = "MIT OR Apache-2.0"
 readme = "README.md"
 edition = "2021"
-rust-version = "1.57.0"
+rust-version = "1.56.0"
 repository = "https://github.com/aki-akaguma/flood-tide"
 
 [features]
@@ -44,26 +44,14 @@ features = ["dox"]
 
 [dependencies]
 
-[dev-dependencies]
-criterion = "0.4"
-criterion-cycles-per-byte = "0.4"
-
 [workspace]
 members = [
+    "xbench",
     "xtask",
 ]
 
 [profile.release]
 lto = true
-
-[[bench]]
-name = "bench-one"
-harness = false
-
-[[bench]]
-name = "bench-curl"
-harness = false
-required-features = ["option_argument", "abbreviate", "argument", "stop_at_mm"]
 
 [[example]]
 name = "gnu-cat"

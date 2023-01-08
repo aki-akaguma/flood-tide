@@ -14,6 +14,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 * update examples/curl.cmd.txt
+* move benches into xbench
 
 
 ## [0.2.7] (2023-01-05)

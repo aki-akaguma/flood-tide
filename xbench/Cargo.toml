@@ -1,0 +1,25 @@
+[package]
+name = "xbench"
+version = "0.1.0"
+edition = "2021"
+rust-version = "1.57.0"
+
+[dependencies]
+
+[dev-dependencies]
+flood-tide = { path="..", features=["option_argument", "abbreviate", "argument", "stop_at_mm"]}
+criterion = "0.4"
+criterion-cycles-per-byte = "0.4"
+clf = "0.1"
+
+
+[[bench]]
+name = "bench-one"
+harness = false
+
+[[bench]]
+name = "bench-curl"
+harness = false
+#features = ["option_argument", "abbreviate", "argument", "stop_at_mm"]
+#required-features = ["option_argument", "abbreviate", "argument", "stop_at_mm"]
+

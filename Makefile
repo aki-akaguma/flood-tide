@@ -1,5 +1,5 @@
 #!/usr/bin/make
-rustc_vers = 1.57.0 1.58.1 1.59.0 1.60.0 1.61.0 1.62.1 1.63.0 \
+rustc_vers = 1.56.1 1.57.0 1.58.1 1.59.0 1.60.0 1.61.0 1.62.1 1.63.0 \
 	1.64.0 1.65.0 1.66.0
 target_base = x86_64-unknown-linux-gnu i586-unknown-linux-gnu
 
@@ -61,7 +61,7 @@ examples/curl.cmd.help.rs.txt: examples/curl.cmd.txt
 	cargo xtask gen-src-example-curl-cmd
 
 bench:
-	cargo bench --bench=bench-curl --features=option_argument,abbreviate,argument,stop_at_mm
+	cargo xbench --bench=bench-curl
 
 test-all-features: $(LOGS)
 
