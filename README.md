@@ -72,40 +72,42 @@ The comparing performance and .text size.
 
 |       `name`       |   `bench`   | `.text`  |  `Δ bench`  | `Δ .text` |
 |:-------------------|------------:|---------:|------------:|---------:|
-| cmp_null_void      |    1.323 kc |  357 kib |    0.000 kc |    0 kib |
-| **cmp_flood_tide** |    5.839 kc |  398 kib |    4.516 kc |   41 kib |
-| cmp_gumdrop        |   11.343 kc |  479 kib |   10.020 kc |  122 kib |
-| cmp_pure_rust      |   12.035 kc |  418 kib |   10.712 kc |   61 kib |
-| cmp_argh           |   23.767 kc |  445 kib |   22.445 kc |   87 kib |
-| cmp_pico_args      |   41.555 kc |  437 kib |   40.232 kc |   79 kib |
-| cmp_rustop         |  405.701 kc |  520 kib |  404.378 kc |  162 kib |
-| cmp_clap           |  476.395 kc | 1031 kib |  475.072 kc |  673 kib |
-| cmp_getopts        |  668.494 kc |  445 kib |  667.171 kc |   88 kib |
-| cmp_structopt      |  672.514 kc | 1020 kib |  671.191 kc |  662 kib |
-| cmp_commander      |  728.809 kc |  464 kib |  727.486 kc |  107 kib |
-| cmp_clap3          |  739.796 kc | 1000 kib |  738.473 kc |  642 kib |
-| cmp_lapp           | 1110.026 kc |  495 kib | 1108.704 kc |  137 kib |
-| cmp_args           | 2122.128 kc |  496 kib | 2120.805 kc |  138 kib |
-| cmp_app            | 2406.356 kc |  752 kib | 2405.033 kc |  394 kib |
+| cmp_null_void      |    1.327 kc |  316 kib |    0.000 kc |    0 kib |
+| **cmp_flood_tide** |    6.315 kc |  356 kib |    4.988 kc |   40 kib |
+| cmp_pure_rust      |    7.951 kc |  368 kib |    6.624 kc |   52 kib |
+| cmp_gumdrop        |   11.346 kc |  432 kib |   10.019 kc |  116 kib |
+| cmp_argh           |   20.851 kc |  385 kib |   19.524 kc |   69 kib |
+| cmp_pico_args      |   39.187 kc |  393 kib |   37.860 kc |   77 kib |
+| cmp_rustop         |  379.726 kc |  465 kib |  378.399 kc |  149 kib |
+| cmp_clap           |  415.422 kc |  988 kib |  414.095 kc |  671 kib |
+| cmp_clap3          |  495.219 kc |  840 kib |  493.893 kc |  524 kib |
+| cmp_structopt      |  553.679 kc |  862 kib |  552.352 kc |  546 kib |
+| cmp_getopts        |  637.986 kc |  395 kib |  636.659 kc |   78 kib |
+| cmp_commander      |  665.407 kc |  412 kib |  664.080 kc |   95 kib |
+| cmp_lapp           | 1115.093 kc |  451 kib | 1113.766 kc |  135 kib |
+| cmp_args           | 2101.706 kc |  427 kib | 2100.379 kc |  110 kib |
+| cmp_app            | 2192.245 kc |  630 kib | 2190.918 kc |  313 kib |
 
-- compile by rustc 1.56.1 (59eed8a2a 2021-11-01)
+
+- compiled by rustc 1.57.0 (f1edd0429 2021-11-29)
 
 |       `name`       |   `bench`   | `.text`  |  `Δ bench`  | `Δ .text` |
 |:-------------------|------------:|---------:|------------:|---------:|
-| cmp_null_void      |    1.213 kc |  342 kib |    0.000 kc |    0 kib |
-| **cmp_flood_tide** |    5.439 kc |  386 kib |    4.226 kc |   43 kib |
-| cmp_gumdrop        |   10.686 kc |  456 kib |    9.473 kc |  114 kib |
-| cmp_pure_rust      |   11.052 kc |  390 kib |    9.839 kc |   47 kib |
-| cmp_argh           |   23.644 kc |  429 kib |   22.431 kc |   86 kib |
-| cmp_pico_args      |  152.401 kc |  457 kib |  151.188 kc |  114 kib |
-| cmp_rustop         |  429.309 kc |  497 kib |  428.096 kc |  155 kib |
-| cmp_clap           |  488.611 kc |  925 kib |  487.399 kc |  583 kib |
-| cmp_getopts        |  695.832 kc |  428 kib |  694.620 kc |   85 kib |
-| cmp_structopt      |  697.229 kc | 1083 kib |  696.016 kc |  741 kib |
-| cmp_commander      |  712.974 kc |  437 kib |  711.762 kc |   94 kib |
-| cmp_lapp           | 1113.328 kc |  476 kib | 1112.115 kc |  133 kib |
-| cmp_args           | 2017.061 kc |  489 kib | 2015.848 kc |  146 kib |
-| cmp_app            | 2348.416 kc |  720 kib | 2347.203 kc |  377 kib |
+| cmp_null_void      |    1.405 kc |  316 kib |    0.000 kc |    0 kib |
+| **cmp_flood_tide** |    5.603 kc |  356 kib |    4.197 kc |   40 kib |
+| cmp_pure_rust      |    7.845 kc |  368 kib |    6.439 kc |   52 kib |
+| cmp_gumdrop        |    8.737 kc |  432 kib |    7.332 kc |  116 kib |
+| cmp_argh           |   23.114 kc |  385 kib |   21.708 kc |   69 kib |
+| cmp_pico_args      |   41.325 kc |  393 kib |   39.920 kc |   77 kib |
+| cmp_rustop         |  394.432 kc |  465 kib |  393.026 kc |  149 kib |
+| cmp_clap           |  426.678 kc |  988 kib |  425.273 kc |  671 kib |
+| cmp_clap3          |  495.857 kc |  840 kib |  494.452 kc |  524 kib |
+| cmp_structopt      |  576.224 kc |  862 kib |  574.818 kc |  546 kib |
+| cmp_getopts        |  657.353 kc |  395 kib |  655.948 kc |   78 kib |
+| cmp_commander      |  673.761 kc |  412 kib |  672.356 kc |   95 kib |
+| cmp_lapp           | 1089.452 kc |  451 kib | 1088.047 kc |  135 kib |
+| cmp_args           | 2066.320 kc |  427 kib | 2064.915 kc |  110 kib |
+| cmp_app            | 2171.903 kc |  630 kib | 2170.498 kc |  313 kib |
 
 - `us` is micro seconds
 - `.text` is elf .text section size
