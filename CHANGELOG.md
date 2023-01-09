@@ -5,7 +5,10 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [Unreleased] *
+## [Unreleased]
+
+
+## [0.2.8] (2023-01-10)
 ### Added
 * version difference link into `CHANGELOG.md`
 * rust-version = "1.57.0" into Cargo.toml
@@ -15,7 +18,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 * update examples/curl.cmd.txt
 * move benches into xbench
-
 
 ## [0.2.7] (2023-01-05)
 ### Changed
@@ -215,7 +217,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [0.1.0] (2017-11-06)
 * first commit
 
-[Unreleased]: https://github.com/aki-akaguma/flood-tide/compare/v0.2.7..HEAD
+[Unreleased]: https://github.com/aki-akaguma/flood-tide/compare/v0.2.8..HEAD
+[0.2.8]: https://github.com/aki-akaguma/flood-tide/compare/v0.2.7..v0.2.8
 [0.2.7]: https://github.com/aki-akaguma/flood-tide/compare/v0.2.6..v0.2.7
 [0.2.6]: https://github.com/aki-akaguma/flood-tide/compare/v0.2.5..v0.2.6
 [0.2.5]: https://github.com/aki-akaguma/flood-tide/compare/v0.2.4..v0.2.5
