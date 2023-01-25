@@ -55,7 +55,7 @@ mod plain {
         assert_eq_tokens_namevals!(tokens, 2, 0u8, "long3", None, CmdOP::Long3);
         //
         #[cfg(feature = "stop_at_mm")]
-        assert_eq!(tokens.double_m, false);
+        assert!(!tokens.double_m);
     }
     #[test]
     fn tokens_long_name_maybe() {
@@ -103,7 +103,7 @@ mod plain {
         assert_eq_tokens_free!(tokens, 0, "a");
         //
         #[cfg(feature = "stop_at_mm")]
-        assert_eq!(tokens.double_m, false);
+        assert!(!tokens.double_m);
     }
     #[test]
     fn tokens_long_name_invalid_option() {
@@ -135,7 +135,7 @@ mod plain {
             ));
             Lex::create_with(&opt_ary, &opt_ary_sho_idx)
         };
-        let _tokens = match lex.tokens_from(&args) {
+        match lex.tokens_from(&args) {
             Ok(_) => unreachable!(),
             Err(e) => {
                 let thing = format!("{}", e);
@@ -174,7 +174,7 @@ mod plain {
             ));
             Lex::create_with(&opt_ary, &opt_ary_sho_idx)
         };
-        let _tokens = match lex.tokens_from(&args) {
+        match lex.tokens_from(&args) {
             Ok(_) => unreachable!(),
             Err(e) => {
                 let thing = format!("{}", e);
@@ -213,7 +213,7 @@ mod plain {
             ));
             Lex::create_with(&opt_ary, &opt_ary_sho_idx)
         };
-        let _tokens = match lex.tokens_from(&args) {
+        match lex.tokens_from(&args) {
             Ok(_) => unreachable!(),
             Err(e) => {
                 let thing = format!("{}", e);
@@ -260,7 +260,7 @@ mod plain {
         assert_eq_tokens_namevals!(tokens, 0, 0u8, "long4", Some(""), CmdOP::Long4);
         //
         #[cfg(feature = "stop_at_mm")]
-        assert_eq!(tokens.double_m, false);
+        assert!(!tokens.double_m);
     }
     #[test]
     fn tokens_long_name_ok_nearly_missing_option_argument2() {
@@ -300,7 +300,7 @@ mod plain {
         assert_eq_tokens_namevals!(tokens, 0, 0u8, "long4", Some(""), CmdOP::Long4);
         //
         #[cfg(feature = "stop_at_mm")]
-        assert_eq!(tokens.double_m, false);
+        assert!(!tokens.double_m);
     }
     #[test]
     fn tokens_long_name_abbreviate() {
@@ -344,7 +344,7 @@ mod plain {
         }
         //
         #[cfg(not(feature = "abbreviate"))]
-        let _tokens = match lex.tokens_from(&args) {
+        match lex.tokens_from(&args) {
             Ok(_) => unreachable!(),
             Err(err) => {
                 let thing = format!("{}", err);
@@ -395,7 +395,7 @@ mod plain {
             }
         };
         #[cfg(not(feature = "abbreviate"))]
-        let _tokens = match lex.tokens_from(&args) {
+        match lex.tokens_from(&args) {
             Ok(_) => unreachable!(),
             Err(err) => {
                 let thing = format!("{}", err);
@@ -448,7 +448,7 @@ mod plain {
         assert_eq_tokens_namevals!(tokens, 0, 0u8, "lon", Some("val2"), CmdOP::Lon);
         //
         #[cfg(feature = "stop_at_mm")]
-        assert_eq!(tokens.double_m, false);
+        assert!(!tokens.double_m);
     }
     #[test]
     fn tokens_long_name_non_abbreviated() {
@@ -492,7 +492,7 @@ mod plain {
             }
         };
         #[cfg(not(feature = "abbreviate"))]
-        let _tokens = match lex.tokens_from(&args) {
+        match lex.tokens_from(&args) {
             Ok(_) => unreachable!(),
             Err(err) => {
                 let thing = format!("{}", err);

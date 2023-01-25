@@ -127,7 +127,7 @@ mod test_1 {
     #[test]
     fn test_errors() {
         let mut errs = OptParseErrors::new();
-        assert_eq!(errs.is_empty(), true);
+        assert!(errs.is_empty());
         assert_eq!(errs.len(), 0);
         //
         errs.push(OptParseError::invalid_option("--abc"));
@@ -159,7 +159,7 @@ mod test_1 {
             "new-first, new-second",
         ));
         //
-        assert_eq!(errs.is_empty(), false);
+        assert!(!errs.is_empty());
         //
         let len = 2;
         #[cfg(feature = "option_argument")]
@@ -175,9 +175,9 @@ mod test_1 {
         assert_eq!(errs.len(), len);
         //
         let thing = format!("{}", errs);
-        let expect = concat!("Invalid option: --abc\n", "Missing option: --abc",);
+        let expect = concat!("Invalid option: --abc\n", "Missing option: --abc",).to_string();
         #[cfg(feature = "option_argument")]
-        let expect = expect.to_string()
+        let expect = expect
             + concat!(
                 "\n",
                 "Invalid option argument: --abc: invalid float literal\n",
@@ -185,24 +185,24 @@ mod test_1 {
                 "Missing option argument: --abc",
             );
         #[cfg(feature = "argument")]
-        let expect = expect.to_string()
+        let expect = expect
             + concat!(
                 "\n",
                 "Missing argument: <input>\n",
                 "Unexpected argument: xyz",
             );
         #[cfg(feature = "subcommand")]
-        let expect = expect.to_string()
+        let expect = expect
             + concat!(
                 "\n",
                 "Invalid subcommand: new\n",
                 "Missing subcommand: <command>",
             );
         #[cfg(feature = "abbreviate")]
-        let expect = expect.to_string() + concat!("\n", "Ambiguous option: --abc: abcd, abce",);
+        let expect = expect + concat!("\n", "Ambiguous option: --abc: abcd, abce",);
         #[cfg(all(feature = "abbreviate", feature = "subcommand"))]
         let expect =
-            expect.to_string() + concat!("\n", "Ambiguous subcommand: new: new-first, new-second",);
+            expect + concat!("\n", "Ambiguous subcommand: new: new-first, new-second",);
         assert_eq!(thing, expect);
     }
     #[test]
@@ -245,31 +245,31 @@ mod test_1 {
         errs.append(errs2);
         //
         let thing = format!("{}", errs);
-        let expect1 = concat!("Invalid option: --abc\n", "Missing option: --abc\n",);
+        let expect1 = concat!("Invalid option: --abc\n", "Missing option: --abc\n",).to_string();
         #[cfg(feature = "option_argument")]
-        let expect1 = expect1.to_string()
+        let expect1 = expect1
             + concat!(
                 "Invalid option argument: --abc: invalid float literal\n",
                 "Unexpected option argument: --abc: defg\n",
             );
         #[cfg(feature = "abbreviate")]
-        let expect1 = expect1.to_string() + concat!("Ambiguous option: --abc: abcd, abce\n",);
-        let expect2 = concat!("Invalid option: --abcd\n", "Missing option: --abcd\n",);
+        let expect1 = expect1 + concat!("Ambiguous option: --abc: abcd, abce\n",);
+        let expect2 = concat!("Invalid option: --abcd\n", "Missing option: --abcd\n",).to_string();
         #[cfg(feature = "option_argument")]
-        let expect2 = expect2.to_string() + "Missing option argument: --abc\n";
+        let expect2 = expect2 + "Missing option argument: --abc\n";
         #[cfg(feature = "argument")]
-        let expect2 = expect2.to_string()
+        let expect2 = expect2
             + concat!("Missing argument: <input>\n", "Unexpected argument: xyz\n",);
         #[cfg(feature = "subcommand")]
-        let expect2 = expect2.to_string()
+        let expect2 = expect2
             + concat!(
                 "Invalid subcommand: new\n",
                 "Missing subcommand: <command>\n",
             );
         #[cfg(all(feature = "abbreviate", feature = "subcommand"))]
         let expect2 =
-            expect2.to_string() + concat!("Ambiguous subcommand: new: new-first, new-second\n",);
-        let expect = expect1.to_string() + &expect2;
+            expect2 + concat!("Ambiguous subcommand: new: new-first, new-second\n",);
+        let expect = expect1 + &expect2;
         assert_eq!(thing + "\n", expect);
     }
     #[test]
@@ -306,35 +306,35 @@ mod test_1 {
         //
         let thing = {
             let mut s = String::new();
-            let mut it = errs.iter();
-            while let Some(err) = it.next() {
+            let it = errs.iter();
+            for err in it {
                 let ss = format!("{}\n", err);
                 s.push_str(ss.as_str());
             }
             s
         };
-        let expect = concat!("Invalid option: --abc\n", "Missing option: --abc\n",);
+        let expect = concat!("Invalid option: --abc\n", "Missing option: --abc\n",).to_string();
         #[cfg(feature = "option_argument")]
-        let expect = expect.to_string()
+        let expect = expect
             + concat!(
                 "Invalid option argument: --abc: invalid float literal\n",
                 "Unexpected option argument: --abc: defg\n",
                 "Missing option argument: --abc\n",
             );
         #[cfg(feature = "argument")]
-        let expect = expect.to_string()
+        let expect = expect
             + concat!("Missing argument: <input>\n", "Unexpected argument: xyz\n",);
         #[cfg(feature = "subcommand")]
-        let expect = expect.to_string()
+        let expect = expect
             + concat!(
                 "Invalid subcommand: new\n",
                 "Missing subcommand: <command>\n",
             );
         #[cfg(feature = "abbreviate")]
-        let expect = expect.to_string() + concat!("Ambiguous option: --abc: abcd, abce\n",);
+        let expect = expect + concat!("Ambiguous option: --abc: abcd, abce\n",);
         #[cfg(all(feature = "abbreviate", feature = "subcommand"))]
         let expect =
-            expect.to_string() + concat!("Ambiguous subcommand: new: new-first, new-second\n",);
+            expect + concat!("Ambiguous subcommand: new: new-first, new-second\n",);
         assert_eq!(thing, expect);
     }
 }

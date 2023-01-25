@@ -48,15 +48,15 @@ mod fmt_debug {
         };
         //
         let thing = format!("{:?}", nv);
-        let expect = "NameVal { opt: Opt { sho: 110, lon: \"name\"";
+        let expect = "NameVal { opt: Opt { sho: 110, lon: \"name\"".to_string();
         #[cfg(feature = "option_argument")]
-        let expect = expect.to_string() + ", has: Yes";
-        let expect = expect.to_string() + ", num: 1 }";
+        let expect = expect + ", has: Yes";
+        let expect = expect + ", num: 1 }";
         #[cfg(feature = "option_argument")]
-        let expect = expect.to_string() + ", val: Some(\"value\")";
+        let expect = expect + ", val: Some(\"value\")";
         #[cfg(feature = "was_long")]
-        let expect = expect.to_string() + ", was_long: true";
-        let expect = expect.to_string() + " }";
+        let expect = expect + ", was_long: true";
+        let expect = expect + " }";
         assert_eq!(thing, expect);
     }
     #[test]
@@ -143,24 +143,24 @@ mod fmt_debug {
                 ""
             }
         };
-        let expect = "Tokens { namevals: ";
+        let expect = "Tokens { namevals: ".to_string();
         #[cfg(feature = "option_argument")]
         #[cfg(feature = "was_long")]
-        let expect = expect.to_string() + concat!(
+        let expect = expect + concat!(
             "[NameVal { opt: Opt { sho: 97, lon: \"name1\", has: Yes, num: 1 }, val: Some(\"value1\"), was_long: true },",
             " NameVal { opt: Opt { sho: 98, lon: \"name2\", has: Yes, num: 2 }, val: Some(\"value2\"), was_long: true },",
             " NameVal { opt: Opt { sho: 99, lon: \"name3\", has: No, num: 3 }, val: None, was_long: false }",
         );
         #[cfg(feature = "option_argument")]
         #[cfg(not(feature = "was_long"))]
-        let expect = expect.to_string() + concat!(
+        let expect = expect + concat!(
             "[NameVal { opt: Opt { sho: 97, lon: \"name1\", has: Yes, num: 1 }, val: Some(\"value1\") },",
             " NameVal { opt: Opt { sho: 98, lon: \"name2\", has: Yes, num: 2 }, val: Some(\"value2\") },",
             " NameVal { opt: Opt { sho: 99, lon: \"name3\", has: No, num: 3 }, val: None }",
         );
         #[cfg(not(feature = "option_argument"))]
         #[cfg(feature = "was_long")]
-        let expect = expect.to_string()
+        let expect = expect
             + concat!(
                 "[NameVal { opt: Opt { sho: 97, lon: \"name1\", num: 1 }, was_long: true },",
                 " NameVal { opt: Opt { sho: 98, lon: \"name2\", num: 2 }, was_long: true },",
@@ -168,16 +168,16 @@ mod fmt_debug {
             );
         #[cfg(not(feature = "option_argument"))]
         #[cfg(not(feature = "was_long"))]
-        let expect = expect.to_string()
+        let expect = expect
             + concat!(
                 "[NameVal { opt: Opt { sho: 97, lon: \"name1\", num: 1 } },",
                 " NameVal { opt: Opt { sho: 98, lon: \"name2\", num: 2 } },",
                 " NameVal { opt: Opt { sho: 99, lon: \"name3\", num: 3 } }",
             );
-        let expect = expect.to_string() + "],";
+        let expect = expect + "],";
         #[cfg(feature = "stop_at_mm")]
-        let expect = expect.to_string() + " double_m: true,";
-        let expect = expect.to_string() + subcmd + " free: [\"free1\", \"free2\", \"free3\"] }";
+        let expect = expect + " double_m: true,";
+        let expect = expect + subcmd + " free: [\"free1\", \"free2\", \"free3\"] }";
         assert_eq!(thing, expect);
     }
     #[test]

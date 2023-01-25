@@ -8,6 +8,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased] *
 ### Fixed
 * Makefile: rustc version `1.66.0` to `1.66.1`
+* clippy: `bool\_assert\_comparison`, `redundant\_clone`
+* clippy: `redundant\_pattern\_matching`, `while\_let\_on\_iterator`
+* clippy: `let\_unit\_value`, `single\_match`
 
 
 ## [0.2.8] (2023-01-10)

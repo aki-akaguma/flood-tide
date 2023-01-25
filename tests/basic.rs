@@ -152,7 +152,7 @@ mod basic {
             assert_eq_tokens_free!(tokens, 1, "other2");
             //
             #[cfg(feature = "stop_at_mm")]
-            assert_eq!(tokens.double_m, false);
+            assert!(!tokens.double_m);
         }
         #[cfg(not(feature = "option_argument"))]
         let _tokens = match lex.tokens_from(&args) {
@@ -317,7 +317,7 @@ mod basic {
             assert_eq_tokens_namevals!(tokens, 2, 0u8, "long3", Some("\t"), CmdOP::Long3);
             //
             #[cfg(feature = "stop_at_mm")]
-            assert_eq!(tokens.double_m, false);
+            assert!(!tokens.double_m);
         }
         #[cfg(not(feature = "option_argument"))]
         {

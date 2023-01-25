@@ -63,10 +63,10 @@ examples/curl.cmd.help.rs.txt: examples/curl.cmd.txt
 bench:
 	cargo xbench --bench=bench-curl
 
-test-all-features: $(LOGS)
-
 $(foreach log,$(features_comb),$(eval LOGS=$(LOGS) target/z.test/z.test-$(log).log))
 $(foreach log,$(features_comb),$(eval $(call template,$(log),$(subst +,$(comma),$(log)))))
+
+test-all-features: $(LOGS)
 
 test-all-version: $(foreach ver,$(rustc_vers),$(foreach tb,$(target_base),target/stamp/stamp.test-rustc.$(ver).$(tb)))
 

@@ -67,7 +67,7 @@ mod plain {
         assert_eq_tokens_namevals!(tokens, 3, b'd', "", None, CmdOP::D);
         //
         #[cfg(feature = "stop_at_mm")]
-        assert_eq!(tokens.double_m, false);
+        assert!(!tokens.double_m);
     }
     #[cfg(feature = "option_argument")]
     #[test]
@@ -112,7 +112,7 @@ mod plain {
         assert_eq_tokens_free!(tokens, 0, "c");
         //
         #[cfg(feature = "stop_at_mm")]
-        assert_eq!(tokens.double_m, false);
+        assert!(!tokens.double_m);
     }
     #[test]
     fn tokens_short_name_invalid_option() {
@@ -150,7 +150,7 @@ mod plain {
             ));
             Lex::create_with(&opt_ary, &opt_ary_sho_idx)
         };
-        let _tokens = match lex.tokens_from(&args) {
+        match lex.tokens_from(&args) {
             Ok(_) => unreachable!(),
             Err(e) => {
                 let thing = format!("{}", e);
@@ -190,7 +190,7 @@ mod plain {
             ));
             Lex::create_with(&opt_ary, &opt_ary_sho_idx)
         };
-        let _tokens = match lex.tokens_from(&args) {
+        match lex.tokens_from(&args) {
             Ok(_) => unreachable!(),
             Err(e) => {
                 let thing = format!("{}", e);
@@ -240,13 +240,12 @@ mod plain {
         assert_eq_tokens_namevals!(tokens, 0, b'a', "", Some("b"), CmdOP::A);
         //
         //assert_eq!(format!("{:?}",tokens.namevals.get(1)),"");
-        match tokens.namevals.get(1) {
-            Some(_) => unreachable!(),
-            _ => {}
+        if tokens.namevals.get(1).is_some() {
+            unreachable!()
         }
         //
         #[cfg(feature = "stop_at_mm")]
-        assert_eq!(tokens.double_m, false);
+        assert!(!tokens.double_m);
     }
     #[cfg(feature = "option_argument")]
     #[test]
@@ -288,9 +287,8 @@ mod plain {
         //
         assert_eq_tokens_namevals!(tokens, 0, b'a', "", Some("-b"), CmdOP::A);
         //
-        match tokens.namevals.get(1) {
-            Some(_) => unreachable!(),
-            _ => {}
+        if tokens.namevals.get(1).is_some() {
+            unreachable!();
         }
     }
 }
