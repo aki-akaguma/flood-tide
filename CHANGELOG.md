@@ -11,6 +11,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 * clippy: `bool\_assert\_comparison`, `redundant\_clone`
 * clippy: `redundant\_pattern\_matching`, `while\_let\_on\_iterator`
 * clippy: `let\_unit\_value`, `single\_match`
+* `LICENSE` files
 
 
 ## [0.2.8] (2023-01-10)
