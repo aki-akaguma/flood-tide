@@ -4,7 +4,9 @@
 [![Docs][docs-image]][docs-link]
 ![Rust Version][rustc-image]
 ![Apache2/MIT licensed][license-image]
-[![Test][test-image]][test-link]
+[![Test ubu][test-ubuntu-image]][test-ubuntu-link]
+[![Test mac][test-windows-image]][test-windows-link]
+[![Test win][test-macos-image]][test-macos-link]
 
 Command line flag and option parse utilities.
 
@@ -141,5 +143,9 @@ at your option.
 [docs-link]: https://docs.rs/flood-tide/
 [rustc-image]: https://img.shields.io/badge/rustc-1.56+-blue.svg
 [license-image]: https://img.shields.io/badge/license-Apache2.0/MIT-blue.svg
-[test-image]: https://github.com/aki-akaguma/flood-tide/actions/workflows/test.yml/badge.svg
-[test-link]: https://github.com/aki-akaguma/flood-tide/actions/workflows/test.yml
+[test-ubuntu-image]: https://github.com/aki-akaguma/flood-tide/actions/workflows/test-ubuntu.yml/badge.svg
+[test-ubuntu-link]: https://github.com/aki-akaguma/flood-tide/actions/workflows/test-ubuntu.yml
+[test-macos-image]: https://github.com/aki-akaguma/flood-tide/actions/workflows/test-macos.yml/badge.svg
+[test-macos-link]: https://github.com/aki-akaguma/flood-tide/actions/workflows/test-macos.yml
+[test-windows-image]: https://github.com/aki-akaguma/flood-tide/actions/workflows/test-windows.yml/badge.svg
+[test-windows-link]: https://github.com/aki-akaguma/flood-tide/actions/workflows/test-windows.yml
