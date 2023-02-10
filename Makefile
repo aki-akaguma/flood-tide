@@ -1,4 +1,54 @@
-#!/usr/bin/make
+
+all: readme
+
+readme: README.md
+
+README.md: README.tpl src/lib.rs
+	cargo readme > $@
+
+test:
+	cargo test --offline
+
+test-no-default-features:
+	cargo test --offline --no-default-features
+
+miri:
+	cargo +nightly miri test --offline
+
+clean:
+	@cargo clean
+	@rm -f z.* *.log *.tmp
+
+clippy:
+	cargo clippy --offline --tests --workspace
+
+fmt:
+	cargo fmt
+
+doc:
+	cargo doc --features dox
+
+tarpaulin:
+	cargo tarpaulin --offline --engine llvm --out html --output-dir ./target
+
+
+example_curl_gen = examples/curl.cmd.match.rs.txt examples/curl.cmd.help.rs.txt
+
+gen: $(example_curl_gen)
+
+gen-clean:
+	rm -f $(example_curl_gen)
+
+examples/curl.cmd.match.rs.txt: examples/curl.cmd.txt
+	cargo xtask gen-src-example-curl-cmd
+
+examples/curl.cmd.help.rs.txt: examples/curl.cmd.txt
+	cargo xtask gen-src-example-curl-cmd
+
+bench:
+	cargo xbench --bench=bench-curl
+
+
 rustc_vers = 1.56.1 1.57.0 1.58.1 1.59.0 1.60.0 1.61.0 1.62.1 1.63.0 \
 	1.64.0 1.65.0 1.66.1
 target_base = x86_64-unknown-linux-gnu i586-unknown-linux-gnu
@@ -10,7 +60,6 @@ target/stamp/stamp.test-rustc.$(1).$(2):
 	@touch target/stamp/stamp.test-rustc.$(1).$(2)
 endef
 
-example_curl_gen = examples/curl.cmd.match.rs.txt examples/curl.cmd.help.rs.txt
 empty:=
 space:=$(empty) $(empty)
 comma:=,
@@ -28,40 +77,6 @@ target/z.test/z.test-$(1).log: src/lib.rs
 	@rm -f z.test-$(1).tmp
 	@echo
 endef
-
-
-all: readme
-	@echo "make [clean|test|readme]"
-
-readme: README.md
-
-README.md: README.tpl src/lib.rs
-	cargo readme > $@
-
-clean:
-	-@rm -f *.log
-	-@rm -f *.tmp
-	-@cargo clean
-
-test:
-	cargo test
-
-doc:
-	cargo doc --features dox
-
-gen: $(example_curl_gen)
-
-gen-clean:
-	rm -f $(example_curl_gen)
-
-examples/curl.cmd.match.rs.txt: examples/curl.cmd.txt
-	cargo xtask gen-src-example-curl-cmd
-
-examples/curl.cmd.help.rs.txt: examples/curl.cmd.txt
-	cargo xtask gen-src-example-curl-cmd
-
-bench:
-	cargo xbench --bench=bench-curl
 
 $(foreach log,$(features_comb),$(eval LOGS=$(LOGS) target/z.test/z.test-$(log).log))
 $(foreach log,$(features_comb),$(eval $(call template,$(log),$(subst +,$(comma),$(log)))))
