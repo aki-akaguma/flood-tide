@@ -50,7 +50,7 @@ impl CmdOP {
 "#;
     //
     let vec_optstr_sorted = {
-        let mut target: Vec<&OptStr> = vec_optstr.iter().map(|o| o).collect();
+        let mut target: Vec<&OptStr> = vec_optstr.iter().collect();
         target.sort_by(|&a, &b| match a.lon.cmp(&b.lon) {
             Ordering::Less => Ordering::Less,
             Ordering::Greater => Ordering::Greater,
@@ -91,7 +91,7 @@ const OPT_ARY: [Opt;"#;
         .filter(|(_, &o)| !o.sho.is_empty())
         .map(|(i, &o)| (&o.sho, i))
         .collect();
-    vec_optstr_sho_idx.sort_by(|a, b| a.0.cmp(&b.0));
+    vec_optstr_sho_idx.sort_by(|a, b| a.0.cmp(b.0));
     //
     let s = r#"
 #[rustfmt::skip]

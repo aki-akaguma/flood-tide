@@ -340,7 +340,7 @@ mod plain {
             };
             assert_eq_tokens_namevals!(tokens, 0, 0u8, "long4", Some("val4"), CmdOP::Long4);
             #[cfg(feature = "stop_at_mm")]
-            assert_eq!(tokens.double_m, false);
+            assert!(!tokens.double_m);
         }
         //
         #[cfg(not(feature = "abbreviate"))]

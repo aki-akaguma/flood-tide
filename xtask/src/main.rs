@@ -58,7 +58,7 @@ fn all_gen() -> anyhow::Result<()> {
     Ok(())
 }
 
-pub fn update_file(sss: &String, file_path: &str) -> anyhow::Result<()> {
+pub fn update_file(sss: &str, file_path: &str) -> anyhow::Result<()> {
     let contents = {
         let mut contents = String::new();
         if let Ok(mut file) = std::fs::File::open(file_path) {

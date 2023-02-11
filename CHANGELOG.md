@@ -20,6 +20,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 * `LICENSE-APACHE`, `LICENSE-MIT`
+* clippy: `needless_borrow`, `bool_assert_comparison`, `map_identity`, `ptr_arg`
 
 
 ## [0.2.9] (2023-01-28)
@@ -29,9 +30,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 * Makefile: rustc version `1.66.0` to `1.66.1`
-* clippy: `bool\_assert\_comparison`, `redundant\_clone`
-* clippy: `redundant\_pattern\_matching`, `while\_let\_on\_iterator`
-* clippy: `let\_unit\_value`, `single\_match`
+* clippy: `bool_assert_comparison`, `redundant_clone`
+* clippy: `redundant_pattern_matching`, `while_let_on_iterator`
+* clippy: `let_unit_value`, `single_match`
 * `LICENSE` files
 
 ## [0.2.8] (2023-01-10)

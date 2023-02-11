@@ -67,7 +67,7 @@ fn print_version_and_exit(conf: &CmdOptConf) {
 fn value_to_string(nv: &NameVal<'_>) -> Result<String, OptParseError> {
     match nv.val {
         Some(x) => Ok(x.to_string()),
-        None => Err(OptParseError::missing_option_argument(&nv.opt.lon)),
+        None => Err(OptParseError::missing_option_argument(nv.opt.lon)),
     }
 }
 
@@ -77,11 +77,11 @@ fn value_to_u32(nv: &NameVal<'_>) -> Result<u32, OptParseError> {
         Some(x) => match x.parse::<u32>() {
             Ok(d) => Ok(d),
             Err(err) => Err(OptParseError::invalid_option_argument(
-                &nv.opt.lon,
+                nv.opt.lon,
                 &err.to_string(),
             )),
         },
-        None => Err(OptParseError::missing_option_argument(&nv.opt.lon)),
+        None => Err(OptParseError::missing_option_argument(nv.opt.lon)),
     }
 }
 
@@ -91,11 +91,11 @@ fn value_to_u64(nv: &NameVal<'_>) -> Result<u64, OptParseError> {
         Some(x) => match x.parse::<u64>() {
             Ok(d) => Ok(d),
             Err(err) => Err(OptParseError::invalid_option_argument(
-                &nv.opt.lon,
+                nv.opt.lon,
                 &err.to_string(),
             )),
         },
-        None => Err(OptParseError::missing_option_argument(&nv.opt.lon)),
+        None => Err(OptParseError::missing_option_argument(nv.opt.lon)),
     }
 }
 
