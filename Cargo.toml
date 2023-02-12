@@ -1,6 +1,6 @@
 [package]
 name = "flood-tide"
-version = "0.2.9"
+version = "0.2.10"
 authors = ["aki <aki.akaguma@hotmail.com>"]
 description = "command line flag and option parse utilities"
 keywords = ["parse", "option", "command", "flag", "argument"]
