@@ -216,7 +216,7 @@ impl OptParseErrors {
         self.0.iter()
     }
     pub fn append(&mut self, other: Self) {
-        self.0.extend(other.0.into_iter())
+        self.0.extend(other.0)
     }
 }
 impl Default for OptParseErrors {

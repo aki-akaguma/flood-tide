@@ -386,7 +386,7 @@ mod plain {
             Lex::create_with(&opt_ary, &opt_ary_sho_idx)
         };
         #[cfg(feature = "abbreviate")]
-        let _tokens = match lex.tokens_from(&args) {
+        match lex.tokens_from(&args) {
             Ok(_) => unreachable!(),
             Err(err) => {
                 let thing = format!("{}", err);
@@ -483,7 +483,7 @@ mod plain {
             Lex::create_with(&opt_ary, &opt_ary_sho_idx)
         };
         #[cfg(feature = "abbreviate")]
-        let _tokens = match lex.tokens_from(&args) {
+        match lex.tokens_from(&args) {
             Ok(_) => unreachable!(),
             Err(err) => {
                 let thing = format!("{}", err);

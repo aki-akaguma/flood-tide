@@ -809,9 +809,9 @@ fn mkerr_invalid_subcommand<T>(name: &str) -> Result<T, OptParseError> {
 }
 
 #[cfg(feature = "abbreviate")]
-fn mkerr_ambiguous_option<'a, 'b, T>(
+fn mkerr_ambiguous_option<'a, T>(
     name: &'a str,
-    ambiguous: &'b [&Opt<'a>],
+    ambiguous: &[&Opt<'a>],
 ) -> Result<T, OptParseError> {
     let mut hint = "possibilities:".to_string();
     for &a in ambiguous {

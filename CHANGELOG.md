@@ -12,6 +12,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 * test support 1.60.0 on github workflows
 * build support 1.60.0 on github workflows
 
+### Fixed
+* clippy: clippy::useless_conversion
+* clippy: clippy::needless_lifetimes
+* clippy: clippy::let_unit_value
+
 
 ## [0.2.10] (2023-02-12)
 ### Added
