@@ -8,6 +8,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 ### Changed
 * rename: `config` to `config.toml`
+* update crates: criterion(0.5), itertools(0.13)
 
 
 ## [0.2.10] (2023-02-12)
