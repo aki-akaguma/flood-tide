@@ -259,7 +259,7 @@ pub struct Opt<'a> {
     /// uniq number
     pub num: OptNum,
 }
-impl<'a> Opt<'a> {
+impl Opt<'_> {
     /// long or short name
     pub fn lon_or_sho(&self) -> String {
         if !self.lon.is_empty() {
@@ -283,7 +283,7 @@ pub struct NameVal<'a> {
     pub was_long: bool,
 }
 
-impl<'a> NameVal<'a> {
+impl NameVal<'_> {
     /// long name or short name
     ///
     /// At the compiling with feature = "was_long",
