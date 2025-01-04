@@ -516,7 +516,7 @@ impl<'a> Lex<'a> {
     // parse
     //
     #[cfg(feature = "abbreviate")]
-    fn find_abbreviate(&'a self, name: &'a str) -> Result<&Opt<'a>, OptParseError> {
+    fn find_abbreviate(&'a self, name: &'a str) -> Result<&'a Opt<'a>, OptParseError> {
         #[rustfmt::skip]
         let ambiguous: Vec<&Opt<'a>> = self.opts.iter()
             .filter(|&o| o.lon.starts_with(name)).collect();
