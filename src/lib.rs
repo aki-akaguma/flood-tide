@@ -574,9 +574,8 @@ impl<'a> Lex<'a> {
                 Ok(idx) => &self.opts[idx],
                 _ => {
                     #[cfg(feature = "abbreviate")]
-                    match self.find_abbreviate(name) {
-                        Ok(o) => o,
-                        Err(err) => return Err(err),
+                    {
+                        self.find_abbreviate(name)?
                     }
                     #[cfg(not(feature = "abbreviate"))]
                     return mkerr_invalid_option(name);

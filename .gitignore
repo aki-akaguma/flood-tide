@@ -1,5 +1,6 @@
 /target/
 **/*.rs.bk
+**/*.rs.swp
 Cargo.lock
 callgrind.out.*
 z.*
