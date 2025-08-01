@@ -17,7 +17,7 @@ mod fmt_debug {
             num: 1,
         };
         //
-        let thing = format!("{:?}", opt);
+        let thing = format!("{opt:?}");
         #[cfg(feature = "option_argument")]
         let expect = "Opt { sho: 110, lon: \"name\", has: Yes, num: 1 }";
         #[cfg(not(feature = "option_argument"))]
@@ -47,7 +47,7 @@ mod fmt_debug {
             was_long: true,
         };
         //
-        let thing = format!("{:?}", nv);
+        let thing = format!("{nv:?}");
         let expect = "NameVal { opt: Opt { sho: 110, lon: \"name\"".to_string();
         #[cfg(feature = "option_argument")]
         let expect = expect + ", has: Yes";
@@ -132,7 +132,7 @@ mod fmt_debug {
             double_m: true,
         };
         //
-        let thing = format!("{:?}", tks);
+        let thing = format!("{tks:?}");
         let subcmd = {
             #[cfg(feature = "subcommand")]
             {
@@ -221,7 +221,7 @@ mod fmt_debug {
             Lex::create_with(&opt_ary, &opt_ary_sho_idx)
         };
         //
-        let thing = format!("{:?}", lex);
+        let thing = format!("{lex:?}");
         //
         let subcmd = {
             #[cfg(feature = "subcommand")]

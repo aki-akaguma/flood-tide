@@ -37,12 +37,12 @@ pub fn check_sorted_sho_idx_ary_with(sho_idx_ary: &[(u8, usize)]) -> bool {
 
 /// Check sorted opt ary table and sorted sho idx ary table.
 /// - opt_ary:
-///     must be sorted by *long* keyword. ex) "barn"
+///   must be sorted by *long* keyword. ex) "barn"
 /// - sho_idx_ary:
-///     must be sorted *short* keyword. ex) b'b'
+///   must be sorted *short* keyword. ex) b'b'
 /// - return:
-///     - true:  ok
-///     - false: illegal tables
+///    - true:  ok
+///    - false: illegal tables
 /// # Examples
 /// ```
 /// #[cfg(feature = "option_argument")]

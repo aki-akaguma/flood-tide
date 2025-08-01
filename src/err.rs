@@ -212,7 +212,7 @@ impl OptParseErrors {
     pub fn push(&mut self, e: OptParseError) {
         self.0.push(e)
     }
-    pub fn iter(&self) -> Iter<OptParseError> {
+    pub fn iter(&self) -> Iter<'_, OptParseError> {
         self.0.iter()
     }
     pub fn append(&mut self, other: Self) {
@@ -233,7 +233,7 @@ impl Display for OptParseErrors {
         } else {
             let mut s = String::new();
             for err in self.iter() {
-                let _ = writeln!(s, "{}", err);
+                let _ = writeln!(s, "{err}");
             }
             write!(fmt, "{}", &s[0..(s.len() - 1)])
         }

@@ -32,7 +32,7 @@ mod fmt_debug {
     #[test]
     fn opt_parse_error_kind() {
         let operrk = OptParseErrorKind::InvalidOption;
-        let thing = format!("{:?}", operrk);
+        let thing = format!("{operrk:?}");
         let expect = "InvalidOption";
         assert_eq!(thing, expect);
     }
@@ -40,7 +40,7 @@ mod fmt_debug {
     #[test]
     fn opt_parse_error() {
         let operr = OptParseError::invalid_option("--abc");
-        let thing = format!("{:?}", operr);
+        let thing = format!("{operr:?}");
         let expect = "OptParseError { kind: InvalidOption, desc1: \"--abc\", desc2: None }";
         assert_eq!(thing, expect);
     }
@@ -49,7 +49,7 @@ mod fmt_debug {
     fn opt_parse_errors() {
         let mut operrs = OptParseErrors::new();
         operrs.push(OptParseError::invalid_option("--abc"));
-        let thing = format!("{:?}", operrs);
+        let thing = format!("{operrs:?}");
         let expect = "OptParseErrors([OptParseError { kind: InvalidOption, desc1: \"--abc\", desc2: None }])";
         assert_eq!(thing, expect);
     }

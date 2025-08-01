@@ -221,7 +221,7 @@ mod plain {
         let tokens = match lex.tokens_from(&args) {
             Ok(t) => t,
             Err(e) => {
-                assert_eq!(format!("{}", e), "");
+                assert_eq!(format!("{e}"), "");
                 unreachable!();
             } //_ => unreachable!(),
         };
@@ -280,7 +280,7 @@ mod plain {
         let tokens = match lex.tokens_from(&args) {
             Ok(t) => t,
             Err(e) => {
-                assert_eq!(format!("{}", e), "");
+                assert_eq!(format!("{e}"), "");
                 unreachable!();
             } //_ => unreachable!(),
         };
@@ -340,7 +340,7 @@ mod plain {
         let tokens = match lex.tokens_from(&args) {
             Ok(t) => t,
             Err(e) => {
-                assert_eq!(format!("{}", e), "");
+                assert_eq!(format!("{e}"), "");
                 unreachable!();
             } //_ => unreachable!(),
         };
@@ -400,7 +400,7 @@ mod plain {
         let tokens = match lex.tokens_from(&args) {
             Ok(t) => t,
             Err(e) => {
-                assert_eq!(format!("{}", e), "");
+                assert_eq!(format!("{e}"), "");
                 unreachable!();
             } //_ => unreachable!(),
         };

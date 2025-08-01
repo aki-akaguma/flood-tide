@@ -153,7 +153,7 @@ mod plain {
         match lex.tokens_from(&args) {
             Ok(_) => unreachable!(),
             Err(e) => {
-                let thing = format!("{}", e);
+                let thing = format!("{e}");
                 let expect = "Invalid option: b";
                 assert_eq!(thing, expect);
             }
@@ -193,7 +193,7 @@ mod plain {
         match lex.tokens_from(&args) {
             Ok(_) => unreachable!(),
             Err(e) => {
-                let thing = format!("{}", e);
+                let thing = format!("{e}");
                 let expect = "Missing option argument: a";
                 assert_eq!(thing, expect);
             }

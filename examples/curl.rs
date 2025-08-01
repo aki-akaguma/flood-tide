@@ -164,7 +164,7 @@ fn create_conf() -> Result<CmdOptConf, OpErr> {
 }
 
 fn run(conf: &CmdOptConf) {
-    eprintln!("{:?}", conf);
+    eprintln!("{conf:?}");
 }
 
 //----------------------------------------------------------------------
@@ -174,7 +174,7 @@ fn main() {
         Ok(conf) => conf,
         Err(err) => {
             const TRY_HELP_MSG: &str = "Try --help for help.";
-            eprintln!("{}\n{}", err, TRY_HELP_MSG);
+            eprintln!("{err}\n{TRY_HELP_MSG}");
             std::process::exit(1);
         }
     };

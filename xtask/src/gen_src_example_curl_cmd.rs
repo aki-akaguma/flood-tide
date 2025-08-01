@@ -23,7 +23,7 @@ fn do_gen_src_help(vec_optstr: &[OptStr], vec_line: &[String]) -> anyhow::Result
     sss += r#"
 const OPTIONS_TEXT: &str = r""#;
     for line in vec_line {
-        sss += &format!("{}\n", line);
+        sss += &format!("{line}\n");
     }
     sss += "\";\n";
     //
@@ -74,7 +74,7 @@ const OPT_ARY: [Opt;"#;
             sss += &format!("sho: b'{}', ", rec.sho);
         }
         let s = "\"".to_string() + &rec.lon + "\",";
-        sss += &format!("lon: {:-17}", s);
+        sss += &format!("lon: {s:-17}");
         sss += if rec.meta.is_empty() {
             "has: Arg::No,  "
         } else {
@@ -273,7 +273,7 @@ fn parse_input_file(in_file: &str) -> anyhow::Result<(Vec<OptStr>, Vec<String>)>
                 ..OptStr::default()
             });
         } else {
-            eprintln!("LINE ERROR: {}", line);
+            eprintln!("LINE ERROR: {line}");
             unreachable!();
         }
         vec_line.push(line);

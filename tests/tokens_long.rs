@@ -91,7 +91,7 @@ mod plain {
             Ok(t) => t,
             //_ => unreachable!(),
             Err(err) => {
-                assert_eq!(format!("{}", err), "");
+                assert_eq!(format!("{err}"), "");
                 unreachable!();
             }
         };
@@ -138,7 +138,7 @@ mod plain {
         match lex.tokens_from(&args) {
             Ok(_) => unreachable!(),
             Err(e) => {
-                let thing = format!("{}", e);
+                let thing = format!("{e}");
                 let expect = "Invalid option: long4";
                 assert_eq!(thing, expect);
             }
@@ -177,7 +177,7 @@ mod plain {
         match lex.tokens_from(&args) {
             Ok(_) => unreachable!(),
             Err(e) => {
-                let thing = format!("{}", e);
+                let thing = format!("{e}");
                 let expect = "Unexpected option argument: long4: val4";
                 assert_eq!(thing, expect);
             }
@@ -216,7 +216,7 @@ mod plain {
         match lex.tokens_from(&args) {
             Ok(_) => unreachable!(),
             Err(e) => {
-                let thing = format!("{}", e);
+                let thing = format!("{e}");
                 let expect = "Missing option argument: long4";
                 assert_eq!(thing, expect);
             }
@@ -347,7 +347,7 @@ mod plain {
         match lex.tokens_from(&args) {
             Ok(_) => unreachable!(),
             Err(err) => {
-                let thing = format!("{}", err);
+                let thing = format!("{err}");
                 let expect = "Invalid option: lon";
                 assert_eq!(thing, expect);
             }
@@ -389,7 +389,7 @@ mod plain {
         match lex.tokens_from(&args) {
             Ok(_) => unreachable!(),
             Err(err) => {
-                let thing = format!("{}", err);
+                let thing = format!("{err}");
                 let expect = "Ambiguous option: lon: possibilities: \'--long1\' \'--long2\'";
                 assert_eq!(thing, expect);
             }
@@ -398,7 +398,7 @@ mod plain {
         match lex.tokens_from(&args) {
             Ok(_) => unreachable!(),
             Err(err) => {
-                let thing = format!("{}", err);
+                let thing = format!("{err}");
                 let expect = "Invalid option: lon";
                 assert_eq!(thing, expect);
             }
@@ -440,7 +440,7 @@ mod plain {
             Ok(t) => t,
             //_ => unreachable!(),
             Err(err) => {
-                assert_eq!(format!("{}", err), "");
+                assert_eq!(format!("{err}"), "");
                 unreachable!();
             }
         };
@@ -486,7 +486,7 @@ mod plain {
         match lex.tokens_from(&args) {
             Ok(_) => unreachable!(),
             Err(err) => {
-                let thing = format!("{}", err);
+                let thing = format!("{err}");
                 let expect = "Ambiguous option: lon: possibilities: \'--long\' \'--long1\'";
                 assert_eq!(thing, expect);
             }
@@ -495,7 +495,7 @@ mod plain {
         match lex.tokens_from(&args) {
             Ok(_) => unreachable!(),
             Err(err) => {
-                let thing = format!("{}", err);
+                let thing = format!("{err}");
                 let expect = "Invalid option: lon";
                 assert_eq!(thing, expect);
             }
