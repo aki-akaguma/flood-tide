@@ -22,7 +22,7 @@ Command line flag and option parse utilities.
 - single error or multiple errors
 - only UTF-8 arguments
 - it can be used optimally by a compile switch with many features.
-- minimum support rustc 1.56.1 (59eed8a2a 2021-11-01)
+- minimum support rustc 1.60.0 (7737e0b5c 2022-04-04)
 
 ## Todos
 
@@ -141,7 +141,7 @@ at your option.
 [crate-link]: https://crates.io/crates/flood-tide
 [docs-image]: https://docs.rs/flood-tide/badge.svg
 [docs-link]: https://docs.rs/flood-tide/
-[rustc-image]: https://img.shields.io/badge/rustc-1.56+-blue.svg
+[rustc-image]: https://img.shields.io/badge/rustc-1.60+-blue.svg
 [license-image]: https://img.shields.io/badge/license-Apache2.0/MIT-blue.svg
 [test-ubuntu-image]: https://github.com/aki-akaguma/flood-tide/actions/workflows/test-ubuntu.yml/badge.svg
 [test-ubuntu-link]: https://github.com/aki-akaguma/flood-tide/actions/workflows/test-ubuntu.yml

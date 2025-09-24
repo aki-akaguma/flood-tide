@@ -366,6 +366,7 @@ const OPT_ARY_SHO_IDX: [(u8,usize);2] = [
 ];
 
 //----------------------------------------------------------------------
+#[allow(dead_code)]
 #[derive(Debug, Default)]
 struct CmdOptConf {
     pub opt_program: String,
@@ -442,6 +443,7 @@ struct PerFileOptConf {
     pub sbt_subtitle_preset: String,
 }
 
+#[allow(dead_code)]
 #[derive(Debug, Default)]
 struct FileConf {
     pub conf: PerFileOptConf,

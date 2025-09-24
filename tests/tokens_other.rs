@@ -1,6 +1,6 @@
 #[allow(unused_macros)]
 #[macro_use]
-mod test_macro;
+mod helper;
 
 mod plain {
     use flood_tide::check;
@@ -165,7 +165,7 @@ mod plain {
         //
         assert_eq_tokens_namevals!(tokens, 0, b'a', "", None, CmdOP::A);
         //
-        if let Some(_) = tokens.namevals.get(1) {
+        if tokens.namevals.get(1).is_some() {
             //assert_eq!(format!("{:?}",tokens.namevals), "");
             unreachable!()
         };
@@ -176,7 +176,7 @@ mod plain {
         assert_eq_tokens_free!(tokens, 3, "other2");
         //
         #[cfg(feature = "stop_at_mm")]
-        assert_eq!(tokens.double_m, false);
+        assert!(!tokens.double_m);
     }
     //}}} stop at first free
     //

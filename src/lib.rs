@@ -13,7 +13,7 @@ Command line flag and option parse utilities.
 - single error or multiple errors
 - only UTF-8 arguments
 - it can be used optimally by a compile switch with many features.
-- minimum support rustc 1.56.1 (59eed8a2a 2021-11-01)
+- minimum support rustc 1.60.0 (7737e0b5c 2022-04-04)
 
 # Todos
 
@@ -169,7 +169,7 @@ where
     T: HelpVersion + SubCommand,
 {
     let lex = Lex::create_with(opt_ary, sho_idx_ary).subcmd(subcmds);
-    let tokens = match lex.tokens_from(&args) {
+    let tokens = match lex.tokens_from(args) {
         Ok(t) => t,
         Err(errs) => {
             return (None, Err(errs));
@@ -180,7 +180,7 @@ where
     let mut errs = OptParseErrors::new();
     //
     for nv in tokens.namevals.iter() {
-        match parse_match(conf, &nv) {
+        match parse_match(conf, nv) {
             Ok(_) => {}
             Err(err) => {
                 #[cfg(feature = "single_error")]
@@ -427,21 +427,21 @@ impl<'a> Lex<'a> {
                 //
                 #[cfg(not(feature = "long_only"))]
                 {
+                    #[cfg(feature = "single_error")]
+                    self.parse_short_name(&mut cursor, &cur[1..], &mut v_namevals)?;
+                    #[cfg(not(feature = "single_error"))]
                     if let Err(errs) =
                         self.parse_short_name(&mut cursor, &cur[1..], &mut v_namevals)
                     {
-                        #[cfg(feature = "single_error")]
-                        return Err(errs);
-                        #[cfg(not(feature = "single_error"))]
                         v_errs.append(errs);
                     }
                 }
                 #[cfg(feature = "long_only")]
                 {
-                    if let Err(errs) = self.parse_long_only(&mut cursor, &cur, &mut v_namevals) {
-                        #[cfg(feature = "single_error")]
-                        return Err(errs);
-                        #[cfg(not(feature = "single_error"))]
+                    #[cfg(feature = "single_error")]
+                    self.parse_long_only(&mut cursor, cur, &mut v_namevals)?;
+                    #[cfg(not(feature = "single_error"))]
+                    if let Err(errs) = self.parse_long_only(&mut cursor, cur, &mut v_namevals) {
                         v_errs.append(errs);
                     }
                 }
@@ -704,12 +704,12 @@ impl<'a> Lex<'a> {
         &'a self,
         mut cursor: &mut dyn Iterator<Item = &'a &'a str>,
         cur: &'a str,
-        mut namevals: &mut Vec<NameVal<'a>>,
+        namevals: &mut Vec<NameVal<'a>>,
     ) -> Result<(), OpErr> {
         if cur.len() == 2 {
             //  "-f"
             // short name
-            let e = self.parse_short_name(&mut cursor, &cur[1..], &mut namevals);
+            let e = self.parse_short_name(&mut cursor, &cur[1..], namevals);
             if let Err(errs) = e {
                 #[cfg(not(feature = "single_error"))]
                 let err = &errs.iter().as_slice()[0];
@@ -821,9 +821,9 @@ fn mkerr_ambiguous_option<'a, T>(
 }
 
 #[cfg(all(feature = "abbreviate", feature = "subcommand"))]
-fn mkerr_ambiguous_subcommand<'a, 'b, T>(
+fn mkerr_ambiguous_subcommand<'a, T>(
     name: &'a str,
-    ambiguous: &'b [&'a str],
+    ambiguous: &[&'a str],
 ) -> Result<T, OptParseError> {
     let mut hint = "possibilities:".to_string();
     for &a in ambiguous {

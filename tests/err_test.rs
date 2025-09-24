@@ -252,7 +252,7 @@ mod test_1 {
                 "Unexpected option argument: --abc: defg\n",
             );
         #[cfg(feature = "abbreviate")]
-        let expect1 = expect1 + concat!("Ambiguous option: --abc: abcd, abce\n",);
+        let expect1 = expect1 + "Ambiguous option: --abc: abcd, abce\n";
         let expect2 = concat!("Invalid option: --abcd\n", "Missing option: --abcd\n",).to_string();
         #[cfg(feature = "option_argument")]
         let expect2 = expect2 + "Missing option argument: --abc\n";
@@ -266,7 +266,7 @@ mod test_1 {
                 "Missing subcommand: <command>\n",
             );
         #[cfg(all(feature = "abbreviate", feature = "subcommand"))]
-        let expect2 = expect2 + concat!("Ambiguous subcommand: new: new-first, new-second\n",);
+        let expect2 = expect2 + "Ambiguous subcommand: new: new-first, new-second\n";
         let expect = expect1 + &expect2;
         assert_eq!(thing + "\n", expect);
     }
@@ -328,9 +328,9 @@ mod test_1 {
                 "Missing subcommand: <command>\n",
             );
         #[cfg(feature = "abbreviate")]
-        let expect = expect + concat!("Ambiguous option: --abc: abcd, abce\n",);
+        let expect = expect + "Ambiguous option: --abc: abcd, abce\n";
         #[cfg(all(feature = "abbreviate", feature = "subcommand"))]
-        let expect = expect + concat!("Ambiguous subcommand: new: new-first, new-second\n",);
+        let expect = expect + "Ambiguous subcommand: new: new-first, new-second\n";
         assert_eq!(thing, expect);
     }
 }

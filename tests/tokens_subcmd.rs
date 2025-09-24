@@ -1,11 +1,12 @@
 #[allow(unused_macros)]
 #[macro_use]
-mod test_macro;
+mod helper;
 
 #[cfg(feature = "option_argument")]
 #[cfg(feature = "subcommand")]
 mod subcommand {
     use flood_tide::check;
+    #[cfg(feature = "option_argument")]
     use flood_tide::Arg;
     use flood_tide::Lex;
     use flood_tide::Opt;
@@ -63,7 +64,7 @@ mod subcommand {
         assert_eq_tokens_subcmd!(tokens, "cmd1");
         //
         #[cfg(feature = "stop_at_mm")]
-        assert_eq!(tokens.double_m, false);
+        assert!(!tokens.double_m);
     }
     #[test]
     fn tokens_subcommand_invalid_subcommand() {
@@ -103,7 +104,7 @@ mod subcommand {
             ));
             Lex::create_with(&opt_ary, &opt_ary_sho_idx).subcmd(&["cmd1", "cmd2", "cmd3"])
         };
-        let _tokens = match lex.tokens_from(&args) {
+        match lex.tokens_from(&args) {
             Ok(_) => unreachable!(),
             Err(e) => {
                 let thing = format!("{}", e);
@@ -164,7 +165,7 @@ mod subcommand {
         assert_eq!(tokens.subcmd, None);
         //
         #[cfg(feature = "stop_at_mm")]
-        assert_eq!(tokens.double_m, false);
+        assert!(!tokens.double_m);
     }
     #[test]
     fn tokens_subcommand_abbreviate() {
@@ -220,11 +221,11 @@ mod subcommand {
             assert_eq_tokens_subcmd!(tokens, "cmd1");
             //
             #[cfg(feature = "stop_at_mm")]
-            assert_eq!(tokens.double_m, false);
+            assert!(!tokens.double_m);
         };
         #[cfg(not(feature = "abbreviate"))]
         {
-            let _tokens = match lex.tokens_from(&args) {
+            match lex.tokens_from(&args) {
                 Ok(_) => unreachable!(),
                 Err(e) => {
                     let thing = format!("{}", e);
@@ -273,7 +274,7 @@ mod subcommand {
             Lex::create_with(&opt_ary, &opt_ary_sho_idx).subcmd(&["cmd1", "cmd2", "cmd3"])
         };
         #[cfg(feature = "abbreviate")]
-        let _tokens = match lex.tokens_from(&args) {
+        match lex.tokens_from(&args) {
             Ok(_) => unreachable!(),
             Err(e) => {
                 let thing = format!("{}", e);
@@ -282,7 +283,7 @@ mod subcommand {
             }
         };
         #[cfg(not(feature = "abbreviate"))]
-        let _tokens = match lex.tokens_from(&args) {
+        match lex.tokens_from(&args) {
             Ok(_) => unreachable!(),
             Err(e) => {
                 let thing = format!("{}", e);
@@ -343,7 +344,7 @@ mod subcommand {
         assert_eq!(tokens.subcmd, None);
         //
         #[cfg(feature = "stop_at_mm")]
-        assert_eq!(tokens.double_m, false);
+        assert!(!tokens.double_m);
     }
     #[test]
     fn tokens_subcommand_invalid_opt() {
@@ -383,7 +384,7 @@ mod subcommand {
             ));
             Lex::create_with(&opt_ary, &opt_ary_sho_idx).subcmd(&["cmd1", "cmd2", "cmd3"])
         };
-        let _tokens = match lex.tokens_from(&args) {
+        match lex.tokens_from(&args) {
             Ok(_) => unreachable!(),
             Err(e) => {
                 let thing = format!("{}", e);

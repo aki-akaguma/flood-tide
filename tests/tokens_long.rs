@@ -1,11 +1,12 @@
 #[allow(unused_macros)]
 #[macro_use]
-mod test_macro;
+mod helper;
 
 #[cfg(feature = "option_argument")]
 #[cfg(not(feature = "long_only"))]
 mod plain {
     use flood_tide::check;
+    #[cfg(feature = "option_argument")]
     use flood_tide::Arg;
     use flood_tide::Lex;
     use flood_tide::Opt;

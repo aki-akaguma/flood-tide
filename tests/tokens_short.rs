@@ -1,6 +1,6 @@
 #[allow(unused_macros)]
 #[macro_use]
-mod test_macro;
+mod helper;
 
 #[cfg(not(feature = "long_only"))]
 mod plain {

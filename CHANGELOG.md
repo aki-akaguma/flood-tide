@@ -7,7 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 ### Added
-* specs/
+* `specs`
+* more tests
+
+### Changed
+* some bits codes
+* rust-version = "1.60.0"
 
 ### Fixed
 * clippy: `clippy::uninlined_format_args`

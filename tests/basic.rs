@@ -1,6 +1,6 @@
 #[allow(unused_macros)]
 #[macro_use]
-mod test_macro;
+mod helper;
 
 mod basic {
     use flood_tide::check;
@@ -155,7 +155,7 @@ mod basic {
             assert!(!tokens.double_m);
         }
         #[cfg(not(feature = "option_argument"))]
-        let _tokens = match lex.tokens_from(&args) {
+        match lex.tokens_from(&args) {
             Ok(t) => {
                 assert_eq!(format!("{:?}", t), "");
                 unreachable!();
@@ -242,10 +242,10 @@ mod basic {
             assert_eq_tokens_free!(tokens, 1, "other2");
             //
             #[cfg(feature = "stop_at_mm")]
-            assert_eq!(tokens.double_m, false);
+            assert!(!tokens.double_m);
         }
         #[cfg(not(feature = "option_argument"))]
-        let _tokens = match lex.tokens_from(&args) {
+        match lex.tokens_from(&args) {
             Ok(t) => {
                 assert_eq!(format!("{:?}", t), "");
                 unreachable!();
@@ -338,10 +338,10 @@ mod basic {
                 assert_eq_tokens_free!(tokens, 3, "\t");
                 //
                 #[cfg(feature = "stop_at_mm")]
-                assert_eq!(tokens.double_m, false);
+                assert!(!tokens.double_m);
             }
             #[cfg(not(feature = "stop_at_free"))]
-            let _tokens = match lex.tokens_from(&args) {
+            match lex.tokens_from(&args) {
                 Ok(t) => {
                     assert_eq!(format!("{:?}", t), "");
                     unreachable!();
