@@ -72,6 +72,7 @@ use alloc::vec::Vec;
 
 pub mod check;
 pub mod err;
+pub mod macro_util;
 pub use err::OptParseError;
 
 #[cfg(any(not(feature = "single_error"), feature = "dox"))]
@@ -151,7 +152,11 @@ where
     #[cfg(feature = "single_error")]
     return (Some(v), Ok(()));
     #[cfg(not(feature = "single_error"))]
-    return (Some(v), Err(errs));
+    if errs.is_empty() {
+        return (Some(v), Ok(()));
+    } else {
+        return (Some(v), Err(errs));
+    }
 }
 
 /// Parse simple gnu style with sub command.
@@ -210,7 +215,11 @@ where
     #[cfg(feature = "single_error")]
     return (Some(v), Ok(()));
     #[cfg(not(feature = "single_error"))]
-    return (Some(v), Err(errs));
+    if errs.is_empty() {
+        return (Some(v), Ok(()));
+    } else {
+        return (Some(v), Err(errs));
+    }
 }
 
 /// Option argument
@@ -831,4 +840,149 @@ fn mkerr_ambiguous_subcommand<'a, T>(
         hint.push_str(ss.as_str());
     }
     Err(OptParseError::ambiguous_subcommand(name, hint.as_str()))
+}
+
+#[doc(hidden)]
+#[macro_export]
+macro_rules! count {
+    () => (0usize);
+    ( $x:tt $($xs:tt)* ) => (1usize + $crate::count!($($xs)*));
+}
+
+/// argparse macro
+///
+/// This macro provides a convenient way to define command line options, a configuration
+/// struct, and a parser at once. It automatically generates the required sorted tables
+/// and parsing logic.
+///
+/// For large-scale projects with a massive number of options (e.g., hundreds of flags),
+/// it is recommended to continue using [flood-tide-gen](https://crates.io/crates/flood-tide-gen)
+/// to keep your source code clean and maintain the definitions in external files.
+///
+/// # Examples
+/// ```
+/// use flood_tide::{argparse, Arg, HelpVersion};
+///
+/// argparse! {
+///     pub struct MyConf {
+///         // (field_name, type, short_char, long_name, has_arg, description, [@special])
+///         (help,    bool, b'h', "help",    Arg::No,  "display help", @help),
+///         (version, bool, b'V', "version", Arg::No,  "display version", @version),
+///         (verbose, bool, b'v', "verbose", Arg::No,  "verbose mode"),
+///         (count,   u32,  b'c', "count",   Arg::Yes, "count value"),
+///         (name,    String, b'n', "name",  Arg::Yes, "name value"),
+///     }
+/// }
+///
+/// fn main() {
+///     let args = ["-vv", "--count=42", "-n", "foo", "extra"];
+///     let conf = MyConf::parse(&args).unwrap();
+///
+///     if conf.is_help() {
+///         // print help...
+///         return;
+///     }
+///
+///     assert!(conf.verbose);
+///     assert_eq!(conf.count, 42);
+///     assert_eq!(conf.name, "foo");
+///     assert_eq!(conf.arg_params, vec!["extra".to_string()]);
+/// }
+/// ```
+#[macro_export]
+macro_rules! argparse {
+    (
+        $( #[$meta:meta] )*
+        $vis:vis struct $name:ident {
+            $( ($field:ident, $type:ty, $sho:expr, $lon:expr, $has:expr, $desc:expr $(, @$special:ident)? ) ),* $(,)?
+        }
+    ) => {
+        #[allow(non_camel_case_types)]
+        #[repr(u8)]
+        #[derive(Debug, PartialEq, Eq, Clone, Copy)]
+        enum CmdOP {
+            $( $field ),*
+        }
+
+        impl CmdOP {
+            pub fn from_num(num: $crate::OptNum) -> Self {
+                $( if num == CmdOP::$field as $crate::OptNum { return CmdOP::$field; } )*
+                unreachable!()
+            }
+        }
+
+        $( #[$meta] )*
+        #[derive(Debug, Default, Clone)]
+        $vis struct $name {
+            $( pub $field : $type ),*
+            , pub arg_params: Vec<String>,
+        }
+
+        const _OPT_COUNT: usize = $crate::count!( $( $field )* );
+
+        const _OPT_ARY_UNSORTED: [$crate::Opt; _OPT_COUNT] = [
+            $(
+                $crate::Opt {
+                    sho: $sho,
+                    lon: $lon,
+                    #[cfg(any(feature = "option_argument", feature = "dox"))]
+                    has: $has,
+                    num: CmdOP::$field as $crate::OptNum,
+                }
+            ),*
+        ];
+
+        /// Option array sorted by long name.
+        pub const OPT_ARY: [$crate::Opt; _OPT_COUNT] = $crate::macro_util::sort_opts(_OPT_ARY_UNSORTED);
+
+        const _SHO_COUNT: usize = $crate::macro_util::count_short_opts(&OPT_ARY);
+        /// Short option index array.
+        pub const OPT_ARY_SHO_IDX: [(u8, usize); _SHO_COUNT] = $crate::macro_util::gen_sho_idx::<_OPT_COUNT, _SHO_COUNT>(&OPT_ARY);
+
+        impl $name {
+            pub fn parse(args: &[&str]) -> Result<Self, $crate::OpErr> {
+                let mut conf = Self::default();
+                let (free, result) = $crate::parse_simple_gnu_style(
+                    &mut conf,
+                    &OPT_ARY,
+                    &OPT_ARY_SHO_IDX,
+                    args,
+                    Self::parse_match,
+                );
+                result?;
+                if let Some(free) = free {
+                    conf.arg_params = free;
+                }
+                Ok(conf)
+            }
+
+            fn parse_match(conf: &mut Self, nv: &$crate::NameVal<'_>) -> Result<(), $crate::OptParseError> {
+                use $crate::macro_util::ArgparseSet;
+                let opt_name = nv.name();
+                match CmdOP::from_num(nv.opt.num) {
+                    $(
+                        CmdOP::$field => {
+                            #[cfg(any(feature = "option_argument", feature = "dox"))]
+                            let val = nv.val;
+                            #[cfg(not(any(feature = "option_argument", feature = "dox")))]
+                            let val = None;
+                            conf.$field.argparse_set(val, &opt_name)?;
+                        }
+                    )*
+                }
+                Ok(())
+            }
+        }
+
+        impl $crate::HelpVersion for $name {
+            fn is_help(&self) -> bool {
+                $( $( if stringify!($special) == "help" { return self.$field; } )? )*
+                false
+            }
+            fn is_version(&self) -> bool {
+                $( $( if stringify!($special) == "version" { return self.$field; } )? )*
+                false
+            }
+        }
+    };
 }
