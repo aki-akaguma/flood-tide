@@ -875,18 +875,37 @@ macro_rules! count {
 /// }
 ///
 /// fn main() {
-///     let args = ["-vv", "--count=42", "-n", "foo", "extra"];
-///     let conf = MyConf::parse(&args).unwrap();
+///     #[cfg(any(feature = "stop_at_mm", feature = "dox"))]
+///     {
+///         #[cfg(any(feature = "option_argument", feature = "dox"))]
+///         #[cfg(not(feature = "long_only"))]
+///         let args = ["-vv", "--count=42", "-n", "foo", "extra"];
+///         #[cfg(any(feature = "option_argument", feature = "dox"))]
+///         #[cfg(feature = "long_only")]
+///         let args = ["-v", "-v", "-count=42", "-n", "foo", "extra"];
 ///
-///     if conf.is_help() {
-///         // print help...
-///         return;
+///         #[cfg(not(any(feature = "option_argument", feature = "dox")))]
+///         #[cfg(not(feature = "long_only"))]
+///         let args = ["-vv", "extra"];
+///         #[cfg(not(any(feature = "option_argument", feature = "dox")))]
+///         #[cfg(feature = "long_only")]
+///         let args = ["-v", "-v", "extra"];
+///
+///         let conf = MyConf::parse(&args).unwrap();
+///
+///         if conf.is_help() {
+///             // print help...
+///             return;
+///         }
+///
+///         assert!(conf.verbose);
+///         #[cfg(any(feature = "option_argument", feature = "dox"))]
+///         {
+///             assert_eq!(conf.count, 42);
+///             assert_eq!(conf.name, "foo");
+///         }
+///         assert_eq!(conf.arg_params, vec!["extra".to_string()]);
 ///     }
-///
-///     assert!(conf.verbose);
-///     assert_eq!(conf.count, 42);
-///     assert_eq!(conf.name, "foo");
-///     assert_eq!(conf.arg_params, vec!["extra".to_string()]);
 /// }
 /// ```
 #[macro_export]
@@ -940,6 +959,7 @@ macro_rules! argparse {
         pub const OPT_ARY_SHO_IDX: [(u8, usize); _SHO_COUNT] = $crate::macro_util::gen_sho_idx::<_OPT_COUNT, _SHO_COUNT>(&OPT_ARY);
 
         impl $name {
+            #[cfg(any(feature = "stop_at_mm", feature = "dox"))]
             pub fn parse(args: &[&str]) -> Result<Self, $crate::OpErr> {
                 let mut conf = Self::default();
                 let (free, result) = $crate::parse_simple_gnu_style(
@@ -956,6 +976,7 @@ macro_rules! argparse {
                 Ok(conf)
             }
 
+            #[cfg(any(feature = "stop_at_mm", feature = "dox"))]
             fn parse_match(conf: &mut Self, nv: &$crate::NameVal<'_>) -> Result<(), $crate::OptParseError> {
                 use $crate::macro_util::ArgparseSet;
                 let opt_name = nv.name();

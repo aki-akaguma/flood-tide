@@ -76,3 +76,15 @@ name = "curl"
 path = "examples/curl.rs"
 test = true
 required-features = ["option_argument", "abbreviate", "argument", "stop_at_mm"]
+
+[[example]]
+name = "macro_verify"
+path = "examples/macro_verify.rs"
+test = true
+required-features = ["stop_at_mm"]
+
+[[example]]
+name = "macro_help"
+path = "examples/macro_help.rs"
+test = true
+required-features = ["stop_at_mm"]
