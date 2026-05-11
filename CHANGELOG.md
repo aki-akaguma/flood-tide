@@ -9,6 +9,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 * `argparse!` macro
 
+### Fixed
+* clippy: `clippy::needless_return`
+
 
 ## [0.2.12] (2025-09-24)
 ### Added

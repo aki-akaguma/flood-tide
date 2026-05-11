@@ -153,9 +153,9 @@ where
     return (Some(v), Ok(()));
     #[cfg(not(feature = "single_error"))]
     if errs.is_empty() {
-        return (Some(v), Ok(()));
+        (Some(v), Ok(()))
     } else {
-        return (Some(v), Err(errs));
+        (Some(v), Err(errs))
     }
 }
 
