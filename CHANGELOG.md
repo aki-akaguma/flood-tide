@@ -6,12 +6,14 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
+
+
+## [0.2.13] (2026-05-11)
 ### Added
 * `argparse!` macro
 
 ### Fixed
 * clippy: `clippy::needless_return`
-
 
 ## [0.2.12] (2025-09-24)
 ### Added
@@ -33,9 +35,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 * build support 1.60.0 on github workflows
 
 ### Fixed
-* clippy: clippy::useless_conversion
-* clippy: clippy::needless_lifetimes
-* clippy: clippy::let_unit_value
+* clippy: `clippy::useless_conversion`
+* clippy: `clippy::needless_lifetimes`
+* clippy: `clippy::let_unit_value`
 
 ## [0.2.10] (2023-02-12)
 ### Added
@@ -69,12 +71,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [0.2.8] (2023-01-10)
 ### Added
 * version difference link into `CHANGELOG.md`
-* rust-version = "1.57.0" into Cargo.toml
-* `all-test-version` target into Makefile
-* badges into README.tpl
+* `rust-version = "1.57.0"` into `Cargo.toml`
+* `all-test-version` target into `Makefile`
+* badges into `README.tpl`
 
 ### Changed
-* update examples/curl.cmd.txt
+* update `examples/curl.cmd.txt`
 * move benches into xbench
 
 ## [0.2.7] (2023-01-05)
@@ -87,7 +89,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 * clippy: you are deriving `PartialEq` and can implement `Eq`
-* clippy: format_push_string
+* clippy: `format_push_string`
 
 ## [0.2.5] (2022-06-13)
 ### Changed
@@ -110,20 +112,20 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [0.2.1] (2021-04-23)
 ### Added
-* add fn Opt::lon_or_sho()
+* add `fn Opt::lon_or_sho()`
 
 ## [0.2.0] (2021-04-03)
 ### Added
-* add trait SubCommand
-* add simple_gnu_style_subc into features
-* add fn parse_simple_gnu_style_subcmd()
+* add `trait SubCommand`
+* add `simple_gnu_style_subc` into features
+* add `fn parse_simple_gnu_style_subcmd()`
 
 ### Changed
-* rename OPErr to OpErr
+* rename `OPErr` to `OpErr`
 * update depends
 
 ### Fixed
-* bug: if the scann has subcmd, then it should stop at free.
+* bug: if the scann has `subcmd`, then it should stop at free.
 * bug: can not compile benches
 
 ### Removed
@@ -131,20 +133,20 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [0.1.21] (2021-02-05)
 ### Changed
-* modify README.md
+* modify `README.md`
 
 ## [0.1.20] (2021-01-31)
 ### Added
-* add impl HelpVersion for OptParseError
-* add help_message() and version_message() to OptParseError
-* add trait HelpVersion
+* add `impl HelpVersion for OptParseError`
+* add `help_message()` and `version_message()` to `OptParseError`
+* add `trait HelpVersion`
 
 ## [0.1.19] (2021-01-09)
 ### Added
-* add "dox" into features
+* add `dox` into features
 
 ### Fixed
-* bug: README.md
+* bug: `README.md`
 
 ## [0.1.18] (2021-01-03)
 ### Changed
@@ -152,7 +154,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [0.1.17] (2020-12-25)
 ### Fixed
-* README.md
+* `README.md`
 
 ## [0.1.16] (2020-12-25)
 ### Changed
@@ -160,97 +162,97 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [0.1.15] (2020-12-25)
 ### Changed
-* rename package flood-tide from optpa-util-5
+* rename package `flood-tide` from `optpa-util-5`
 
 ## [0.1.14] (2020-12-20)
 ### Added
-* add Lex::create_with()
-* add create_with to features
-* add sorted_opt_ary to features
+* add `Lex::create_with()`
+* add `create_with` to features
+* add `sorted_opt_ary` to features
 
 ### Removed
-* delete Lex::create_from()
-* delete from features: sorted_opt_ary, create_with
+* delete `Lex::create_from()`
+* delete from features: `sorted_opt_ary`, `create_with`
 
 ## [0.1.13] (2020-12-18)
 ### Added
-* add to features: stop_at_mm, stop_at_free, no_std
+* add to features: `stop_at_mm`, `stop_at_free`, `no_std`
 
 ### Removed
-* remove from features: std
+* remove from features: `std`
 
 ## [0.1.12] (2020-12-09)
 ### Changed
-* impl std::error::Error for OptParseErrors
+* `impl std::error::Error for OptParseErrors`
 
 ## [0.1.11] (2020-12-06)
 ### Changed
-* import optpaerr-5("0.1.6" (2020-12-05))
-* README.txt is added and edited
+* import `optpaerr-5("0.1.6" (2020-12-05))`
+* `README.txt` is added and edited
 * replace crate combination("0.1.2") to itertools("0.9") in xtask
 
 ## [0.1.10] (2020-12-04)
 ### Added
-* add error message with file name to xtask::update_file()
+* add error message with file name to `xtask::update_file()`
 
 ### Changed
 * modify some examples
 
 ### Fixed
-* clippy: xtask/src/gen_features_combination.rs
-* clippy: examples/curl.rs
+* clippy: `xtask/src/gen_features_combination.rs`
+* clippy: `examples/curl.rs`
 
 ## [0.1.9] (2020-12-02)
 ### Added
-* add fn parse_simple_gnu_style()
+* add `fn parse_simple_gnu_style()`
 
 ### Changed
 * change examples new style
 * refactoring source code
 
 ### Fixed
-* bug: examples/curl.rs and xtask
+* bug: `examples/curl.rs` and xtask
 
 ## [0.1.8] (2020-11-28)
 ### Added
-* add gen_features_combination to xtask
-* add optnum_u16 to \[features]
-* add bench-one.rs
+* add `gen_features_combination` to xtask
+* add `optnum_u16` to `\[features]`
+* add `bench-one.rs`
 
 ### Changed
-* change to public: pub struct CmdOptConf, on examples/curl.rs
+* change to public: `pub struct CmdOptConf`, on `examples/curl.rs`
 
 ## [0.1.7] (2020-11-25)
 ### Added
-* add xtask for example curl
-* add example curl
+* add `xtask` for example `curl`
+* add `example curl`
 
 ### Changed
-* change Vec<&str> to &\[&str] at the param type of tokens_from()
-* refactoring xtask's gen_src_example_curl_cmd
+* change `Vec<&str>` to `&\[&str]` at the param type of `tokens_from()`
+* refactoring xtask's `gen_src_example_curl_cmd`
 
 ### Removed
-* remove scripts/gen-parser-curl.pl
+* remove `scripts/gen-parser-curl.pl`
 
 ## [0.1.6] (2020-11-18)
 ### Added
-* add README.md, COPYING, LICENSE-APACHE, LICENSE-MIT
-* add no_std
-* add example gnu-cat
+* add `README.md`, `COPYING`, `LICENSE-APACHE`, `LICENSE-MIT`
+* add `no_std`
+* add example `gnu-cat`
 
 ### Changed
-* rename repo: optpa-util to optpa-util-1
+* rename repo: `optpa-util` to `optpa-util-1`
 
 ## [0.1.5] (2020-10-29)
 ### Added
-* add NameVal.name()
+* add `NameVal.name()`
 
 ## [0.1.4] (2020-10-05)
 ### Added
-* add option_argument to features
-* add example/ffmpeg
-* add example/bsd-sed
-* add examples
+* add `option_argument` to features
+* add `example/ffmpeg`
+* add `example/bsd-sed`
+* add `examples`
 
 ### Fixed
 * argument features
@@ -258,16 +260,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [0.1.3] (2020-09-20)
 ### Changed
 * refactoring
-* change 'is_long' to 'was_long'
+* change `is_long` to `was_long`
 
 ## [0.1.2] (2020-09-17)
 ### Changed
-* fork optpa-util
+* fork `optpa-util`
 * a lot of things
 
 ## [0.1.1] (2018-05-22)
 ### Changed
-* rename optpa_util to optpa-util
+* rename `optpa_util` to `optpa-util`
 
 ### Fixed
 * dependencies
@@ -275,7 +277,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [0.1.0] (2017-11-06)
 * first commit
 
-[Unreleased]: https://github.com/aki-akaguma/flood-tide/compare/v0.2.12..HEAD
+[Unreleased]: https://github.com/aki-akaguma/flood-tide/compare/v0.2.13..HEAD
+[0.2.13]: https://github.com/aki-akaguma/flood-tide/compare/v0.2.12..v0.2.13
 [0.2.12]: https://github.com/aki-akaguma/flood-tide/compare/v0.2.11..v0.2.12
 [0.2.11]: https://github.com/aki-akaguma/flood-tide/compare/v0.2.10..v0.2.11
 [0.2.10]: https://github.com/aki-akaguma/flood-tide/compare/v0.2.9..v0.2.10
