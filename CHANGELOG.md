@@ -8,6 +8,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 ### Changed
 - Optimize compile-time sorting algorithm from bubble sort to shell sort in `argparse!` macro.
+- Refactor `src/lib.rs` to reduce `cfg` attribute noise by extracting feature-gated logic into helper methods.
 
 
 ## [0.2.13] (2026-05-11)

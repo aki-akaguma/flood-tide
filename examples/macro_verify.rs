@@ -1,3 +1,4 @@
+#[allow(unused_imports)]
 use flood_tide::{argparse, Arg};
 
 argparse! {
@@ -13,7 +14,7 @@ argparse! {
 fn main() {
     let args = ["-vv", "--count=42", "-n", "foo", "extra"];
     let conf = MyConf::parse(&args).unwrap();
-    
+
     println!("{:?}", conf);
     assert!(conf.verbose);
     assert_eq!(conf.count, 42);

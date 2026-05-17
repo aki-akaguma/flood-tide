@@ -384,6 +384,92 @@ impl<'a> Lex<'a> {
         self.subcmds = subcmd_ary;
         self
     }
+
+    #[cfg(feature = "stop_at_mm")]
+    #[inline]
+    fn is_double_m(&self, cur: &str) -> bool {
+        cur == "--"
+    }
+    #[cfg(not(feature = "stop_at_mm"))]
+    #[inline]
+    fn is_double_m(&self, _: &str) -> bool {
+        false
+    }
+
+    #[cfg(feature = "stop_at_free")]
+    #[inline]
+    fn is_stop_at_free(&self) -> bool {
+        true
+    }
+    #[cfg(not(feature = "stop_at_free"))]
+    #[inline]
+    fn is_stop_at_free(&self) -> bool {
+        false
+    }
+
+    #[cfg(feature = "long_only")]
+    #[inline]
+    fn is_long_only(&self) -> bool {
+        true
+    }
+    #[cfg(not(feature = "long_only"))]
+    #[inline]
+    fn is_long_only(&self) -> bool {
+        false
+    }
+
+    #[inline]
+    fn push_err(
+        &self,
+        #[cfg(not(feature = "single_error"))] v_errs: &mut OpErr,
+        err: OptParseError,
+    ) -> Result<(), OpErr> {
+        #[cfg(feature = "single_error")]
+        {
+            Err(err)
+        }
+        #[cfg(not(feature = "single_error"))]
+        {
+            v_errs.push(err);
+            Ok(())
+        }
+    }
+
+    #[inline]
+    fn append_errs(
+        &self,
+        #[cfg(not(feature = "single_error"))] v_errs: &mut OpErr,
+        errs: OpErr,
+    ) -> Result<(), OpErr> {
+        #[cfg(feature = "single_error")]
+        {
+            Err(errs)
+        }
+        #[cfg(not(feature = "single_error"))]
+        {
+            v_errs.append(errs);
+            Ok(())
+        }
+    }
+
+    #[inline]
+    fn handle_double_m_removal(&self, v_free: &mut Vec<&'a str>) -> bool {
+        #[cfg(feature = "stop_at_mm")]
+        {
+            if !v_free.is_empty() && v_free[0] == "--" {
+                v_free.remove(0);
+                true
+            } else {
+                false
+            }
+        }
+        #[cfg(not(feature = "stop_at_mm"))]
+        {
+            let _ = v_free;
+            false
+        }
+    }
+
     /// analyze and return tokens
     pub fn tokens_from(&'a self, args: &'a [&'a str]) -> Result<Tokens<'a>, OpErr> {
         #[cfg(not(feature = "single_error"))]
@@ -393,38 +479,33 @@ impl<'a> Lex<'a> {
         //
         let mut cursor = args.iter();
         'itr_cursor: while let Some(cur) = cursor.next() {
-            #[cfg(feature = "stop_at_mm")]
-            {
-                if *cur == "--" {
-                    // stop on
-                    v_free.push(cur);
-                    v_free.extend(cursor);
-                    break 'itr_cursor;
-                }
+            if self.is_double_m(cur) {
+                v_free.push(cur);
+                v_free.extend(cursor);
+                break 'itr_cursor;
             }
             let f_single = if !cur.starts_with('-') {
                 // free
                 v_free.push(cur);
-                #[cfg(feature = "stop_at_free")]
-                {
+                if self.is_stop_at_free() {
                     v_free.extend(cursor);
                     break 'itr_cursor;
                 }
-                #[cfg(not(feature = "stop_at_free"))]
                 false
             } else {
                 true
             };
-            #[cfg(not(feature = "long_only"))]
-            let f_single = if f_single && cur.starts_with("--") {
+
+            let f_single = if f_single && !self.is_long_only() && cur.starts_with("--") {
                 // option: long name
                 match self.parse_long_name(&mut cursor, &cur[2..]) {
                     Ok(nv) => v_namevals.push(nv),
                     Err(err) => {
-                        #[cfg(feature = "single_error")]
-                        return Err(err);
-                        #[cfg(not(feature = "single_error"))]
-                        v_errs.push(err)
+                        self.push_err(
+                            #[cfg(not(feature = "single_error"))]
+                            &mut v_errs,
+                            err,
+                        )?;
                     }
                 };
                 false
@@ -433,25 +514,26 @@ impl<'a> Lex<'a> {
             };
             if f_single {
                 // option: short name or long only
-                //
-                #[cfg(not(feature = "long_only"))]
-                {
-                    #[cfg(feature = "single_error")]
-                    self.parse_short_name(&mut cursor, &cur[1..], &mut v_namevals)?;
-                    #[cfg(not(feature = "single_error"))]
-                    if let Err(errs) =
-                        self.parse_short_name(&mut cursor, &cur[1..], &mut v_namevals)
-                    {
-                        v_errs.append(errs);
+                if !self.is_long_only() {
+                    let res = self.parse_short_name(&mut cursor, &cur[1..], &mut v_namevals);
+                    if let Err(errs) = res {
+                        self.append_errs(
+                            #[cfg(not(feature = "single_error"))]
+                            &mut v_errs,
+                            errs,
+                        )?;
                     }
-                }
-                #[cfg(feature = "long_only")]
-                {
-                    #[cfg(feature = "single_error")]
-                    self.parse_long_only(&mut cursor, cur, &mut v_namevals)?;
-                    #[cfg(not(feature = "single_error"))]
-                    if let Err(errs) = self.parse_long_only(&mut cursor, cur, &mut v_namevals) {
-                        v_errs.append(errs);
+                } else {
+                    #[cfg(feature = "long_only")]
+                    {
+                        let res = self.parse_long_only(&mut cursor, cur, &mut v_namevals);
+                        if let Err(errs) = res {
+                            self.append_errs(
+                                #[cfg(not(feature = "single_error"))]
+                                &mut v_errs,
+                                errs,
+                            )?;
+                        }
                     }
                 }
             }
@@ -464,20 +546,12 @@ impl<'a> Lex<'a> {
             }
         }
         //
-        #[cfg(feature = "stop_at_mm")]
-        let is_stop_at_double_m = {
-            if !v_free.is_empty() && v_free[0] == "--" {
-                v_free.remove(0);
-                true
-            } else {
-                false
-            }
-        };
+        let _is_stop_at_double_m = self.handle_double_m_removal(&mut v_free);
         //
         #[cfg(feature = "subcommand")]
         {
             #[cfg(feature = "stop_at_mm")]
-            let b = !self.subcmds.is_empty() && !is_stop_at_double_m;
+            let b = !self.subcmds.is_empty() && !_is_stop_at_double_m;
             #[cfg(not(feature = "stop_at_mm"))]
             let b = !self.subcmds.is_empty();
             let v_cmd = if b {
@@ -505,7 +579,7 @@ impl<'a> Lex<'a> {
                 namevals: v_namevals,
                 free: v_free,
                 #[cfg(feature = "stop_at_mm")]
-                double_m: is_stop_at_double_m,
+                double_m: _is_stop_at_double_m,
                 subcmd: v_cmd,
             })
         }
@@ -515,7 +589,7 @@ impl<'a> Lex<'a> {
                 namevals: v_namevals,
                 free: v_free,
                 #[cfg(feature = "stop_at_mm")]
-                double_m: is_stop_at_double_m,
+                double_m: _is_stop_at_double_m,
             })
         }
     }
@@ -646,13 +720,12 @@ impl<'a> Lex<'a> {
                 match found {
                     Ok(idx) => &self.opts[self.sho_idx[idx].1],
                     _ => {
-                        #[cfg(feature = "single_error")]
-                        return Err(OptParseError::invalid_option(c_name));
-                        #[cfg(not(feature = "single_error"))]
-                        {
-                            errs.push(OptParseError::invalid_option(c_name));
-                            continue '_ic_iter;
-                        }
+                        self.push_err(
+                            #[cfg(not(feature = "single_error"))]
+                            &mut errs,
+                            OptParseError::invalid_option(c_name),
+                        )?;
+                        continue '_ic_iter;
                     }
                 }
             };
@@ -680,13 +753,12 @@ impl<'a> Lex<'a> {
             } else if let Some(&cur_val) = _cursor.next() {
                 Some(cur_val)
             } else {
-                #[cfg(feature = "single_error")]
-                return Err(OptParseError::missing_option_argument(c_name));
-                #[cfg(not(feature = "single_error"))]
-                {
-                    errs.push(OptParseError::missing_option_argument(c_name));
-                    continue '_ic_iter;
-                }
+                self.push_err(
+                    #[cfg(not(feature = "single_error"))]
+                    &mut errs,
+                    OptParseError::missing_option_argument(c_name),
+                )?;
+                continue '_ic_iter;
             };
             //
             namevals.push(NameVal {
@@ -720,10 +792,16 @@ impl<'a> Lex<'a> {
             // short name
             let e = self.parse_short_name(&mut cursor, &cur[1..], namevals);
             if let Err(errs) = e {
-                #[cfg(not(feature = "single_error"))]
-                let err = &errs.iter().as_slice()[0];
-                #[cfg(feature = "single_error")]
-                let err = &errs;
+                let err = {
+                    #[cfg(not(feature = "single_error"))]
+                    {
+                        &errs.iter().as_slice()[0]
+                    }
+                    #[cfg(feature = "single_error")]
+                    {
+                        &errs
+                    }
+                };
                 if err.kind() == OptParseErrorKind::InvalidOption {
                     // long name
                     match self.parse_long_name(&mut cursor, &cur[1..]) {
@@ -731,14 +809,14 @@ impl<'a> Lex<'a> {
                             namevals.push(nv);
                         }
                         Err(err) => {
-                            #[cfg(feature = "single_error")]
-                            return Err(err);
                             #[cfg(not(feature = "single_error"))]
                             {
                                 let mut errs = OpErr::new();
                                 errs.push(err);
                                 return Err(errs);
                             }
+                            #[cfg(feature = "single_error")]
+                            return Err(err);
                         }
                     };
                 } else {
@@ -749,14 +827,14 @@ impl<'a> Lex<'a> {
             match self.parse_long_name(&mut cursor, &cur[1..]) {
                 Ok(nv) => namevals.push(nv),
                 Err(err) => {
-                    #[cfg(feature = "single_error")]
-                    return Err(err);
                     #[cfg(not(feature = "single_error"))]
                     {
                         let mut errs = OpErr::new();
                         errs.push(err);
                         return Err(errs);
                     }
+                    #[cfg(feature = "single_error")]
+                    return Err(err);
                 }
             }
         };

@@ -1,3 +1,4 @@
+#[allow(unused_imports)]
 use flood_tide::{argparse, Arg, HelpVersion};
 
 argparse! {
@@ -12,10 +13,10 @@ argparse! {
 fn main() {
     let args = ["--help"];
     let conf = MyConf::parse(&args).unwrap();
-    
+
     println!("is_help: {}", conf.is_help());
     assert!(conf.is_help());
-    
+
     let args = ["-V"];
     let conf = MyConf::parse(&args).unwrap();
     println!("is_version: {}", conf.is_version());
