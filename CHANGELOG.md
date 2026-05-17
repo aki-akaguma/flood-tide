@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 - Optimize compile-time sorting algorithm from bubble sort to shell sort in `argparse!` macro.
 - Refactor `src/lib.rs` to reduce `cfg` attribute noise by extracting feature-gated logic into helper methods.
+- Refactor `str_cmp` in `src/macro_util.rs` for improved readability while maintaining Rust 1.60.0 compatibility.
 
 
 ## [0.2.13] (2026-05-11)

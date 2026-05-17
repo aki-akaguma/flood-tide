@@ -24,7 +24,7 @@ The `flood-tide` library is a high-performance, lightweight command-line argumen
 
 ### 1. Code Readability and Maintainability
 - **Extensive `cfg` Usage:** The codebase is heavily interleaved with `#[cfg(...)]` attributes. While this is necessary for the library's goals, it makes the code significantly harder to read and maintain. Consider using patterns that isolate platform-specific or feature-specific code, or explore tools that can help manage complex configuration logic.
-- **Manual String Comparison in `const fn`:** The `str_cmp` function in `macro_util.rs` is a manual implementation. While necessary for `const fn` support in older Rust versions (1.60.0), it is a bit verbose.
+- **Manual String Comparison in `const fn`:** The `str_cmp` function in `macro_util.rs` has been refined for better readability while maintaining compatibility with Rust 1.60.0. Although a manual implementation remains necessary due to MSRV constraints, the code is now more concise and idiomatic.
 
 ### 2. Documentation and Discoverability
 - **Feature Matrix:** Given the large number of feature flags, a clear matrix or table in the documentation showing which features are required for specific functionality would be very helpful.

@@ -7,26 +7,28 @@ use core::cmp::Ordering;
 use alloc::string::{String, ToString};
 
 pub const fn str_cmp(a: &str, b: &str) -> Ordering {
-    let a = a.as_bytes();
-    let b = b.as_bytes();
-    let len = if a.len() < b.len() { a.len() } else { b.len() };
+    let (a, b) = (a.as_bytes(), b.as_bytes());
     let mut i = 0;
-    while i < len {
-        if a[i] < b[i] {
-            return Ordering::Less;
-        }
-        if a[i] > b[i] {
-            return Ordering::Greater;
+    let min_len = if a.len() < b.len() { a.len() } else { b.len() };
+
+    while i < min_len {
+        if a[i] != b[i] {
+            return if a[i] < b[i] {
+                Ordering::Less
+            } else {
+                Ordering::Greater
+            };
         }
         i += 1;
     }
+
     if a.len() < b.len() {
-        return Ordering::Less;
+        Ordering::Less
+    } else if a.len() > b.len() {
+        Ordering::Greater
+    } else {
+        Ordering::Equal
     }
-    if a.len() > b.len() {
-        return Ordering::Greater;
-    }
-    Ordering::Equal
 }
 
 pub const fn opt_cmp(a: &Opt, b: &Opt) -> Ordering {
