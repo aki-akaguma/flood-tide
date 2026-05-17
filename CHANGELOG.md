@@ -6,11 +6,13 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
+
+
+## [0.2.14] (2026-05-17)
 ### Changed
 - Optimize compile-time sorting algorithm from bubble sort to shell sort in `argparse!` macro.
 - Refactor `src/lib.rs` to reduce `cfg` attribute noise by extracting feature-gated logic into helper methods.
 - Refactor `str_cmp` in `src/macro_util.rs` for improved readability while maintaining Rust 1.60.0 compatibility.
-
 
 ## [0.2.13] (2026-05-11)
 ### Added
@@ -281,7 +283,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [0.1.0] (2017-11-06)
 * first commit
 
-[Unreleased]: https://github.com/aki-akaguma/flood-tide/compare/v0.2.13..HEAD
+[Unreleased]: https://github.com/aki-akaguma/flood-tide/compare/v0.2.14..HEAD
+[0.2.14]: https://github.com/aki-akaguma/flood-tide/compare/v0.2.13..v0.2.14
 [0.2.13]: https://github.com/aki-akaguma/flood-tide/compare/v0.2.12..v0.2.13
 [0.2.12]: https://github.com/aki-akaguma/flood-tide/compare/v0.2.11..v0.2.12
 [0.2.11]: https://github.com/aki-akaguma/flood-tide/compare/v0.2.10..v0.2.11
