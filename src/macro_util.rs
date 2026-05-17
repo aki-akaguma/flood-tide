@@ -52,18 +52,25 @@ pub const fn opt_cmp(a: &Opt, b: &Opt) -> Ordering {
 }
 
 pub const fn sort_opts<const N: usize>(mut opts: [Opt; N]) -> [Opt; N] {
-    let mut i = 0;
-    while i < N {
-        let mut j = i + 1;
-        while j < N {
-            if let Ordering::Greater = opt_cmp(&opts[i], &opts[j]) {
-                let tmp = opts[i];
-                opts[i] = opts[j];
-                opts[j] = tmp;
+    let mut gap = N / 2;
+    while gap > 0 {
+        let mut i = gap;
+        while i < N {
+            let temp = opts[i];
+            let mut j = i;
+            while j >= gap {
+                match opt_cmp(&opts[j - gap], &temp) {
+                    Ordering::Greater => {
+                        opts[j] = opts[j - gap];
+                        j -= gap;
+                    }
+                    _ => break,
+                }
             }
-            j += 1;
+            opts[j] = temp;
+            i += 1;
         }
-        i += 1;
+        gap /= 2;
     }
     opts
 }
@@ -92,18 +99,24 @@ pub const fn gen_sho_idx<const N: usize, const M: usize>(opts: &[Opt; N]) -> [(u
         i += 1;
     }
     // sort res by sho (u8)
-    let mut i = 0;
-    while i < M {
-        let mut j = i + 1;
-        while j < M {
-            if res[i].0 > res[j].0 {
-                let tmp = res[i];
-                res[i] = res[j];
-                res[j] = tmp;
+    let mut gap = M / 2;
+    while gap > 0 {
+        let mut i = gap;
+        while i < M {
+            let temp = res[i];
+            let mut j = i;
+            while j >= gap {
+                if res[j - gap].0 > temp.0 {
+                    res[j] = res[j - gap];
+                    j -= gap;
+                } else {
+                    break;
+                }
             }
-            j += 1;
+            res[j] = temp;
+            i += 1;
         }
-        i += 1;
+        gap /= 2;
     }
     res
 }
