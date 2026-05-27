@@ -1,5 +1,6 @@
 use criterion::{criterion_group, criterion_main, Criterion};
 use criterion_cycles_per_byte::CyclesPerByte;
+use std::hint::black_box;
 
 mod curl;
 
@@ -30,7 +31,7 @@ fn criterion_test(_c: &mut Criterion<CyclesPerByte>) {
         arg_params: vec!["http://url1.com".to_string()],
         ..Default::default()
     };
-    match process_one(criterion::black_box(&ENV_ARGS)) {
+    match process_one(black_box(&ENV_ARGS)) {
         Ok(conf) => {
             assert_eq!(conf, result_conf);
         }
@@ -47,7 +48,7 @@ fn criterion_test(_c: &mut Criterion<CyclesPerByte>) {
 fn criterion_benchmark(c: &mut Criterion<CyclesPerByte>) {
     c.bench_function("curl::", |b| {
         b.iter(|| {
-            let _r = process_one(criterion::black_box(&ENV_ARGS));
+            let _r = process_one(black_box(&ENV_ARGS));
         })
     });
 }

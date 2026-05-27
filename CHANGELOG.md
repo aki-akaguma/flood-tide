@@ -6,20 +6,22 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
+### Changed
+* update crates: criterion(0.8), criterion-cycles-per-byte(0.8), clf(0.2)
 
 
 ## [0.2.14] (2026-05-17)
 ### Changed
-- Optimize compile-time sorting algorithm from bubble sort to shell sort in `argparse!` macro.
-- Refactor `src/lib.rs` to reduce `cfg` attribute noise by extracting feature-gated logic into helper methods.
-- Refactor `str_cmp` in `src/macro_util.rs` for improved readability while maintaining Rust 1.60.0 compatibility.
+* Optimize compile-time sorting algorithm from bubble sort to shell sort in `argparse!` macro.
+* Refactor `src/lib.rs` to reduce `cfg` attribute noise by extracting feature-gated logic into helper methods.
+* Refactor `str_cmp` in `src/macro_util.rs` for improved readability while maintaining Rust 1.60.0 compatibility.
 
 ## [0.2.13] (2026-05-11)
 ### Added
 * `argparse!` macro
 
 ### Fixed
-* clippy: `clippy::needless_return`
+* `clippy::needless_return`
 
 ## [0.2.12] (2025-09-24)
 ### Added
@@ -31,7 +33,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 * rust-version = "1.60.0"
 
 ### Fixed
-* clippy: `clippy::uninlined_format_args`
+* `clippy::uninlined_format_args`
 
 ## [0.2.11] (2024-06-09)
 ### Changed
@@ -41,9 +43,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 * build support 1.60.0 on github workflows
 
 ### Fixed
-* clippy: `clippy::useless_conversion`
-* clippy: `clippy::needless_lifetimes`
-* clippy: `clippy::let_unit_value`
+* `clippy::useless_conversion`
+* `clippy::needless_lifetimes`
+* `clippy::let_unit_value`
 
 ## [0.2.10] (2023-02-12)
 ### Added
@@ -60,7 +62,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 * `LICENSE-APACHE`, `LICENSE-MIT`
-* clippy: `needless_borrow`, `bool_assert_comparison`, `map_identity`, `ptr_arg`
+* `clippy::needless_borrow`
+* `clippy::bool_assert_comparison`
+* `clippy::map_identity`
+* `clippy::ptr_arg`
 
 ## [0.2.9] (2023-01-28)
 ### Added
@@ -69,9 +74,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 * Makefile: rustc version `1.66.0` to `1.66.1`
-* clippy: `bool_assert_comparison`, `redundant_clone`
-* clippy: `redundant_pattern_matching`, `while_let_on_iterator`
-* clippy: `let_unit_value`, `single_match`
+* `clippy::bool_assert_comparison`
+* `clippy::redundant_clone`
+* `clippy::redundant_pattern_matching`
+* `clippy::while_let_on_iterator`
+* `clippy::let_unit_value`
+* `clippy::single_match`
 * `LICENSE` files
 
 ## [0.2.8] (2023-01-10)
@@ -95,7 +103,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 * clippy: you are deriving `PartialEq` and can implement `Eq`
-* clippy: `format_push_string`
+* `clippy::format_push_string`
 
 ## [0.2.5] (2022-06-13)
 ### Changed

@@ -8,10 +8,12 @@ rust-version = "1.57.0"
 
 [dev-dependencies]
 flood-tide = { path="..", features=["option_argument", "abbreviate", "argument", "stop_at_mm"]}
-criterion = "0.5"
-criterion-cycles-per-byte = "0.6"
-clf = "0.1"
+criterion = { version = "0.8", default-features = false }
+criterion-cycles-per-byte = "0.8"
+clf = "0.2"
 
+[features]
+single_error = []
 
 [[bench]]
 name = "bench-one"
