@@ -157,7 +157,7 @@ impl Display for OptParseError {
         //
         let msg: &str = match self.kind {
             HelpMessage | VersionMessage => {
-                return write!(fmt, "{}", &self.desc1);
+                return write!(fmt, "{}", self.desc1);
             }
             //
             InvalidOption => "Invalid option",
@@ -186,8 +186,8 @@ impl Display for OptParseError {
             AmbiguousSubcommand => "Ambiguous subcommand",
         };
         match self.desc2 {
-            Some(ref s) => write!(fmt, "{}: {}: {}", msg, &self.desc1, &s),
-            None => write!(fmt, "{}: {}", msg, &self.desc1),
+            Some(ref s) => write!(fmt, "{}: {}: {}", msg, self.desc1, s),
+            None => write!(fmt, "{}: {}", msg, self.desc1),
         }
     }
 }

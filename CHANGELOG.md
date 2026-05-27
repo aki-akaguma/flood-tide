@@ -9,6 +9,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 * update crates: criterion(0.8), criterion-cycles-per-byte(0.8), clf(0.2)
 
+### Fixed
+* `clippy::useless_borrows_in_formatting`
+
 
 ## [0.2.14] (2026-05-17)
 ### Changed
